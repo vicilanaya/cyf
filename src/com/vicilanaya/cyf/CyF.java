@@ -16,52 +16,66 @@ public class CyF {
 	 * @param args
 	 */
 	
+	static String message = null;
+	static String key = null;
 	static char[] squareCharacters = new char[25];
 	static ArrayList<Cell> square  = new ArrayList<>();
+	static String encipheredMessage = null;
+	static String decipheredMessage = null;
 	
 	public static void main(String[] args) {
 		
+		/** show menu options */
+		
+		
 		/** get input */
 		Scanner input = new Scanner(System.in);
-		System.out.println("Enter your message: ");
-		String key = input.nextLine().trim();
-		System.out.println("key is: " + key);	// TEST
-		System.out.println("Enter your key (Only letters will be used.): ");
-		String message = input.nextLine().trim();
+		System.out.print("Enter the message you want to encipher (Only letters will be used.): ");
+		message = input.nextLine().trim();
 		System.out.println("message is: " + message);	// TEST
+		System.out.print("Enter your key (Only letters will be used. Shorter is better.): ");
+		key = input.nextLine().trim();
+		System.out.println("key is: " + key);	// TEST
 		input.close();
 		System.out.println("input closed");	// TEST
 		
 		/** prep square elements */
-		System.out.print("squareCharacters is: ");	// TEST
-		System.out.println(squareCharacters);	// TEST
+		System.out.print("Prepping square elements");	// TEST
 		prepKeyAlphabet(key);
+		System.out.println("Square elements prepped\n");	// TEST
 
 		/** build square */
-		buildSquare(squareCharacters);	// CONTINUE HERE
-		
+		System.out.println("Building square");	// TEST
+		buildSquare(squareCharacters);
+		System.out.println("Square built\n");	// TEST
 		
 		/** display square */
-		
-		
+		System.out.println("Printing square");	// TEST
+		printSquare(square, key);
+		System.out.println("Square printed\n");	// TEST
 		
 		/** process message */
-		
-		
+		System.out.println("Processing deciphered message");	// TEST
+		encipheringMessage(message);
+		System.out.println("Deciphered message processed = message enciphered\n");	// TEST
 		
 		/** display enciphered message */
-		
+		System.out.println("Printing enciphered message");	// TEST
+		printEncipheredMessage(message, encipheredMessage);
+		System.out.println("Enciphered message printed\n");	// TEST
 		
 		
 		
 	}	// end main method
 
+	
 	private static void prepKeyAlphabet(String key) {
 		char[] alphabet = {'A','B','C','D','E','F','G','H','I','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
-		System.out.println("alphabet is: ");// TEST
+		System.out.print("alphabet is: ");// TEST
 		System.out.println(alphabet);	// TEST
 		
-		String preppedKey = prepInput(key);
+		String semiPreppedKey = prepInput(key);
+		String preppedKey = stripDuplicates(semiPreppedKey);
 		System.out.println("prepped key is: " + preppedKey);	// TEST
 		
 		int i;	// count key character elements
@@ -86,7 +100,7 @@ public class CyF {
 				characterIndex++;
 				System.out.println("character is: " + characterIndex);	// TEST
 				System.out.println("j is: " + j);	// TEST
-			}
+			}	// end if else
 		}	// end for loop
 		System.out.print("squareCharacters array after adding alphabet is: ");	// TEST
 		System.out.println(squareCharacters);	// TEST
@@ -101,12 +115,11 @@ public class CyF {
 	}	// end linearSearch method
 
 	
-	private static String prepInput(String input) {
+	private static String prepInput(String input) {	// CONTINUE HERE
 		
 		String result = null;
 		// .toUpperCase()
-		// strip string of punctuation, spaces, duplicates
-		// copy numbers
+		// strip string of numbers, punctuation, spaces
 		// replace IJ
 		
 		return result;
@@ -114,63 +127,126 @@ public class CyF {
 	}	// end prepInput method
 	
 	
-	private static ArrayList<Cell> buildSquare(char[] squareCharacters) {	// CONTINUE HERE
+	private static String stripDuplicates(String key) {	// CONTINUE HERE
+		
+		// strip duplicates
+		
+		return key;
+	}	// end stripDuplicates method
+	
+	
+	private static void buildSquare(char[] squareCharacters) {
 		int row = 1;
 		int column = 1;
+		int cellNumber = 1;
 		int index = 0;
 		for (char character : squareCharacters) {
-			square.add(new Cell(character, row, column, index));
-		
+			square.add(new Cell(character, row, column, cellNumber));
+			System.out.println("built cell " + square.get(index).getCellNumber()  + " with character " + square.get(index).getCharacter() 
+					+ " in row " + square.get(index).getRow() + " and column " + square.get(index).getColumn());	// TEST
+			if (column % 5 == 0) {	// reset column if column is multiple of 5
+				row++;
+				column = 1;
+				cellNumber++;
+				index++;
+			}
+			else {
+				column++;
+				cellNumber++;
+				index++;
+			}
 		}	// end for loop
-		
-		
-		return null;
+		System.out.println("square built");	// TEST
 	}	// end buildSquare method
 	
 	
-	boolean isSameRow() {
+	private static void printSquare(ArrayList<Cell> square, String key) {
+		System.out.println("Your key: " + key);
+		System.out.println("Your crypto square:");
+		square.forEach(e -> {
+			System.out.print(" " + e.printCharacter() + " ");
+			if (e.cellNumber % 5 == 0)	// go to next line if cellNumber is multiple of 5
+				System.out.print("\n");
+		});	// end lambda expression
+	}	// end printSquare method
+	
+	
+	private static void encipheringMessage(String message) {	// CONTINUE HERE
+		String preppedMessage = prepInput(message);
+		// make array from string
+		// pair characters
+		// split pairs of duplicates
+		// add Z to last single character
+		// switch characters
+		// group in 5 + space
+	}	// end encipheringMessage method
+	
+	
+	private static boolean isSameRow() {	// CONTINUE HERE
 		return true;
 	}
 	
-	boolean isSameColumn() {
+	private static boolean isSameColumn() {	// CONTINUE HERE
 		return true;
 	}	
 	
-	boolean isDuplicate() {
+	private static boolean isDuplicate() {	// CONTINUE HERE
 		return true;
 	}
+	
+	private static void printEncipheredMessage(String message, String encipheredMessage) {
+		System.out.println("The original message is: ");
+		System.out.println(message);
+		System.out.println("The enciphered message is: ");
+		System.out.println(encipheredMessage);
+	}	// end printEncipheredMessage method
 }	// CyF class
 
 
 
-class Cell implements Comparable<Cell>{
+class Cell {
+//	class Cell implements Comparable<Cell>{
 	
-	char character = '\u0000';	// keyCharacters[0]
+	char character = '\u0000';
 	int row = 1;
 	int column = 1;
-	int index = 0;
-//	char characterDisplayed;	// cubeCharacters[0]	// not needed
+	int cellNumber = 1;
 	
-	Cell(char character, int row, int column, int index) {
+	Cell(char character, int row, int column, int cellNumber) {
 		this.character = character;
 		this.row = row;
 		this.column = column;
-		this.index = index;
+		this.cellNumber = cellNumber;
 	}	// end constructor
 
-	@Override
-	public int compareTo(Cell cell) {
-		return index - cell.index;
+	public char getCharacter() {
+		return character;
+	}
+	public int getRow() {
+		return row;
+	}
+	public int getColumn() {
+		return column;
+	}
+	public int getCellNumber() {
+		return cellNumber;
+	}
+
+//	@Override
+//	public int compareTo(Cell cell) {
+//		return cellNumber - cell.cellNumber;
+//	}
+//	@Override
+	public String printCharacter() {
+		if (character == 'I' || character == 'J')	// CHECK IF THIS IS NEEDED
+			return 'I' + "";	// NEED TO SUBSTITUTE IJ CHARACTER
+		return character + "";
 	}
 	@Override
 	public String toString() {
-		return character + "";
+//		return "Cell [character=" + character + ", row=" + row + ", column=" + column + ", cellNumber=" + cellNumber + "]";	// default toString
+		return "Cell " + cellNumber + " [character=" + character + ", row=" + row + ", column=" + column + "]";
 	}
-//	@Override
-//	public String toString() {	// default toString
-//		return "Cell [character=" + character + ", row=" + row + ", column=" + column + ", index=" + index + "]";
-//	}
-	
 
-}// end Cell class
+}	// end Cell class
 
