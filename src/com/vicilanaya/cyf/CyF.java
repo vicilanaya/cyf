@@ -165,7 +165,7 @@ public class CyF {
 		System.out.println("Your crypto square:");
 		square.forEach(e -> {
 			System.out.print(" " + e.printCharacter() + " ");
-			if (e.cellNumber % 5 == 0)	// go to next line if cellNumber is multiple of 5
+			if (e.getCellNumber() % 5 == 0)	// go to next line if cellNumber is multiple of 5
 				System.out.print("\n");
 		});	// end lambda expression
 	}	// end printSquare method
@@ -182,17 +182,22 @@ public class CyF {
 	}	// end encipheringMessage method
 	
 	
-	private static boolean isSameRow() {	// CONTINUE HERE
-		return true;
+	private static boolean isSameCharacter(Cell cell1, Cell cell2) {
+		if (cell1.getCharacter() == cell2.getCharacter())
+			return true;
+		return false;
+	}
+	private static boolean isSameRow(Cell cell1, Cell cell2) {
+		if (cell1.getRow() == cell2.getRow())
+			return true;
+		return false;
+	}
+	private static boolean isSameColumn(Cell cell1, Cell cell2) {
+		if (cell1.getColumn() == cell2.getColumn())
+			return true;
+		return false;
 	}
 	
-	private static boolean isSameColumn() {	// CONTINUE HERE
-		return true;
-	}	
-	
-	private static boolean isDuplicate() {	// CONTINUE HERE
-		return true;
-	}
 	
 	private static void printEncipheredMessage(String message, String encipheredMessage) {
 		System.out.println("The original message is: ");
@@ -207,10 +212,10 @@ public class CyF {
 class Cell {
 //	class Cell implements Comparable<Cell>{
 	
-	char character = '\u0000';
-	int row = 1;
-	int column = 1;
-	int cellNumber = 1;
+	private char character = '\u0000';
+	private int row = 1;
+	private int column = 1;
+	private int cellNumber = 1;
 	
 	Cell(char character, int row, int column, int cellNumber) {
 		this.character = character;
