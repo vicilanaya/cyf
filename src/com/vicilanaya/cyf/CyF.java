@@ -34,59 +34,28 @@ public class CyF extends Exception {
 	
 	public static void main(String[] args) {
 		
-		/** intro */
-		System.out.println("Welcome to CyF. CyF is a cryptographic engine.\n"
+		System.out.println("Showing intro");	// TEST
+		showIntro();
+		System.out.println("Intro shown");	// TEST
+		
+		/** obtain input */
+		System.out.println("Routing selection");	// TEST
+		router(getSelection());
+		
+		System.out.print("Thank you for using CyF. You may restart the program.");
+		System.exit(0);
+		
+	}	// end main method
+	
+	private static void showIntro() {
+		System.out.println("Welcome to CyF. CyF is a cryptographic engine. Created by Florence Vicil Anaya.\n"
 				+ "This application enciphers and deciphers messages by using a key.\n" 
 				+ "You receive the enciphered or deciphered message\n"
 				+ "and the cipher square created from the key.");
 		System.out.println("This engine is currently limited to processing the following characters:\n"
 				+ "ABCDEFGHIJKLMNOPQRSTUVWXYZ.");
 		System.out.println("Numbers, punctuation, and symbols are ignored.");
-		
-		/** obtain input */
-		System.out.println("Routing selection");	// TEST
-		router(getSelection());
-		
-		// write enciper method
-		// write decipher method
-		
-		System.out.print("Enter the message you want to encipher (Only letters will be used.): ");
-		message = input.nextLine().trim();
-		System.out.println("message is: " + message);	// TEST
-		System.out.print("Enter your key (Only letters will be used. Shorter is better.): ");
-		key = input.nextLine().trim();
-		System.out.println("key is: " + key);	// TEST
-		input.close();
-		System.out.println("input closed");	// TEST
-		
-		/** prep square elements */
-		System.out.print("Prepping square elements");	// TEST
-		prepKeyAlphabet(key);
-		System.out.println("Square elements prepped\n");	// TEST
-
-		/** build square */
-		System.out.println("Building square");	// TEST
-		buildSquare(squareCharacters);
-		System.out.println("Square built\n");	// TEST
-		
-		/** display square */
-		System.out.println("Printing square");	// TEST
-		printSquare(square, key);
-		System.out.println("Square printed\n");	// TEST
-		
-		/** process message */
-		System.out.println("Processing deciphered message");	// TEST
-		encipheringMessage(message);
-		System.out.println("Deciphered message processed = message enciphered\n");	// TEST
-		
-		/** display enciphered message */
-		System.out.println("Printing enciphered message");	// TEST
-		printEncipheredMessage(message, encipheredMessage);
-		System.out.println("Enciphered message printed\n");	// TEST
-		
-		System.exit(0);	// or clear everything and getSelection() 
-		
-	}	// end main method
+	}	// end intro method
 	
 	private static String showMenu() {
 		return "Choose your option:\n1 - Encipher a message\n2 - Decipher a message\n0 - Exit application\n";
@@ -105,16 +74,78 @@ public class CyF extends Exception {
 		return selection;
 	}	// end getOption method
 	
-	private static void router(int selection) {	// CONTINUE HERE
+	private static void router(int selection) {
+		System.out.println("Switch started");	// TEST
 		switch (selection) {
-		case 0: System.out.print("Thank you for using CyF.");
-			System.exit(1);
-		case 1: // encipher
+		case 0: System.out.print("Thank you for using CyF. You may restart the program.");
+				System.exit(1);
+		case 1: encipher();
 			break;
-		case 2: // decipher
+		case 2: decipher();
 			break;
 		}	// end switch
+		System.out.println("Switch ended");	// TEST
 	}	// end router method
+	
+	private static void encipher() {
+		System.out.print("Enter the message you want to encipher: ");
+		message = input.nextLine().trim();
+		System.out.println("message is: " + message);	// TEST
+		System.out.print("Enter your key (Shorter is better.): ");
+		key = input.nextLine().trim();
+		System.out.println("key is: " + key);	// TEST
+		input.close();
+		System.out.println("input closed");	// TEST
+
+		System.out.print("Prepping square elements");	// TEST
+		prepKeyAlphabet(key);
+		System.out.println("Square elements prepped\n");	// TEST
+
+		System.out.println("Building square");	// TEST
+		buildSquare(squareCharacters);
+		System.out.println("Square built\n");	// TEST
+
+		System.out.println("Printing square");	// TEST
+		printSquare(square, key);
+		System.out.println("Square printed\n");	// TEST
+
+		System.out.println("Processing deciphered message");	// TEST
+		encipheringMessage(message);
+		System.out.println("Deciphered message processed = message enciphered\n");	// TEST
+
+		System.out.println("Printing enciphered message");	// TEST
+		printEncipheredMessage(message, encipheredMessage);
+		System.out.println("Enciphered message printed\n");	// TEST
+		
+	}	// end encipher method
+	
+	private static void decipher() {	// CONTINUE HERE
+		System.out.print("Enter the message you want to decipher: ");
+		message = input.nextLine().trim();
+		System.out.println("message is: " + message);	// TEST
+		System.out.print("Enter your key (Shorter is better.): ");
+		key = input.nextLine().trim();
+		System.out.println("key is: " + key);	// TEST
+		input.close();
+		System.out.println("input closed\n");	// TEST
+		
+		System.out.println("Building square");	// TEST
+		buildSquare(squareCharacters);
+		System.out.println("Square built\n");	// TEST
+
+		System.out.println("Printing square");	// TEST
+		printSquare(square, key);
+		System.out.println("Square printed\n");	// TEST
+		
+		System.out.println("Processing enciphered message");	// TEST
+		decipheringMessage();	// CONTINUE HERE arguments
+		System.out.println("Enciphered message processed = message deciphered\n");	// TEST
+		
+		System.out.println("Printing deciphered message");	// TEST
+		printDecipheredMessage();	// CONTINUE HERE arguments
+		System.out.println("Deciphered message printed\n");	// TEST
+		
+	}	// end decipher method
 	
 	private static void prepKeyAlphabet(String key) {
 		char[] alphabet = {'A','B','C','D','E','F','G','H',IJ,'K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
@@ -153,7 +184,6 @@ public class CyF extends Exception {
 		System.out.println(squareCharacters);	// TEST
 	}	// end prepKeyAlphabet method
 	
-	
 	private static boolean linearSearch(char[] squareCharacters, char alphabetCharacter) {
 		for (int i = 0; i < squareCharacters.length; i++)
 			if (alphabetCharacter == squareCharacters[i])
@@ -161,7 +191,6 @@ public class CyF extends Exception {
 		return false;
 	}	// end linearSearch method
 
-	
 	private static String prepInput1(String input) {	// CONTINUE HERE
 		
 		String result = null;
@@ -173,14 +202,12 @@ public class CyF extends Exception {
 		
 	}	// end prepInput method
 	
-	
 	private static String stripDuplicates(String key) {	// CONTINUE HERE
 		
 		// strip duplicates
 		
 		return key;
 	}	// end stripDuplicates method
-	
 	
 	private static void buildSquare(char[] squareCharacters) {
 		int row = 1;
@@ -206,7 +233,6 @@ public class CyF extends Exception {
 		System.out.println("square built");	// TEST
 	}	// end buildSquare method
 	
-	
 	private static void printSquare(ArrayList<Cell> square, String key) {
 		System.out.println("Your key: " + key);
 		System.out.println("Your crypto square:");
@@ -218,7 +244,6 @@ public class CyF extends Exception {
 		});	// end lambda expression
 	}	// end printSquare method
 	
-	
 	private static void encipheringMessage(String message) {	// CONTINUE HERE
 		ArrayList<Character> b = prepInput2(message);
 		
@@ -228,6 +253,10 @@ public class CyF extends Exception {
 		// replace IJ
 		// group in 5 + space
 	}	// end encipheringMessage method
+	
+	private static void decipheringMessage() {	// CONTINUE HERE
+		
+	}	// end decipheringMessage method
 	
 	private static ArrayList<Character> prepInput2(String input) {
 		char[] a = prepInput1(input).toCharArray();
@@ -270,7 +299,6 @@ public class CyF extends Exception {
 		return b;
 	}	// end prepInput2 method
 	
-	
 //	private static boolean isSameCharacter(Character character1, Character character2) {
 //		if (character1 == character2)
 //			return true;
@@ -287,13 +315,18 @@ public class CyF extends Exception {
 		return false;
 	}
 	
-	
 	private static void printEncipheredMessage(String message, String encipheredMessage) {
 		System.out.println("The original message is: ");
 		System.out.println(message);
 		System.out.println("The enciphered message is: ");
 		System.out.println(encipheredMessage);
 	}	// end printEncipheredMessage method
+	
+	private static void printDecipheredMessage() {	// CONTINUE HERE
+		
+	}	// end printDecipheredMessage method
+	
+	
 }	// CyF class
 
 
