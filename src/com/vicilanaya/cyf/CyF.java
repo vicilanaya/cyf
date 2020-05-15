@@ -7,21 +7,26 @@
 package com.vicilanaya.cyf;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
  * @author Florence Vicil Anaya vicilanaya@gmail.com
  *
  */
-public class CyF {
+public class CyF extends Exception {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * @param args
 	 */
-	
+
+	static Scanner input = new Scanner(System.in);
 	static String message = null;
 	static String key = null;
+	static final char ij = '\u0132';
 	static char[] squareCharacters = new char[25];
 	static ArrayList<Cell> square  = new ArrayList<>();
 	static String encipheredMessage = null;
@@ -29,11 +34,22 @@ public class CyF {
 	
 	public static void main(String[] args) {
 		
-		/** show menu options */
+		/** intro */
+		System.out.println("Welcome to CyF. CyF is a cryptographic engine.\n"
+				+ "This application enciphers and deciphers messages by using a key.\n" 
+				+ "You receive the enciphered or deciphered message\n"
+				+ "and the cipher square created from the key.");
+		System.out.println("This engine is currently limited to processing the following characters:\n"
+				+ "ABCDEFGHIJKLMNOPQRSTUVWXYZ.");
+		System.out.println("Numbers, punctuation, and symbols are ignored.");
 		
+		/** obtain input */
+		System.out.println("Routing selection");	// TEST
+		router(getSelection());
 		
-		/** get input */
-		Scanner input = new Scanner(System.in);
+		// write enciper method
+		// write decipher method
+		
 		System.out.print("Enter the message you want to encipher (Only letters will be used.): ");
 		message = input.nextLine().trim();
 		System.out.println("message is: " + message);	// TEST
@@ -68,13 +84,40 @@ public class CyF {
 		printEncipheredMessage(message, encipheredMessage);
 		System.out.println("Enciphered message printed\n");	// TEST
 		
-		
+		System.exit(0);	// or getSelection() 
 		
 	}	// end main method
+	
+	private static String showMenu() {
+		return "Choose your option:\n1 - Encipher a message\n2 - Decipher a message\n0 - Exit application\n";
+	}	// end showMenu method
 
+	private static int getSelection() {	// THROW invalid input EXCEPTION
+		int selection = 0;
+		do {
+			showMenu();
+			System.out.print("Your selection: ");
+			selection = input.nextInt();
+			if (selection < 0 || selection > 2) {
+				System.out.print("Your selection is not an option.");
+			}
+		} while (selection < 0 || selection > 2);
+		return selection;
+	}	// end getOption method
+	
+	private static void router(int selection) {	// CONTINUE HERE
+		switch (selection) {
+		case 0: System.out.print("Thank you for using CyF.");
+			System.exit(1);
+		case 1: // encipher
+			break;
+		case 2: // decipher
+			break;
+		}	// end switch
+	}	// end router method
 	
 	private static void prepKeyAlphabet(String key) {
-		char[] alphabet = {'A','B','C','D','E','F','G','H','I','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+		char[] alphabet = {'A','B','C','D','E','F','G','H',ij,'K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 		System.out.print("alphabet is: ");// TEST
 		System.out.println(alphabet);	// TEST
 		
@@ -171,7 +214,7 @@ public class CyF {
 			System.out.print(" " + e.printCharacter() + " ");
 			if (e.getCellNumber() % 5 == 0) {	// go to next line if cellNumber is multiple of 5
 				System.out.print("\n");
-		}
+			}
 		});	// end lambda expression
 	}	// end printSquare method
 	
@@ -290,7 +333,7 @@ class Cell {
 //	@Override
 	public String printCharacter() {
 		if (character == 'I' || character == 'J')	// CHECK IF THIS IS NEEDED
-			return 'I' + "";	// NEED TO SUBSTITUTE TO IJ CHARACTER
+			return '\u0132' + "";	// IJ
 		return character + "";
 	}
 	@Override
