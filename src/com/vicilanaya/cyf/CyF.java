@@ -84,7 +84,7 @@ public class CyF extends Exception {
 		printEncipheredMessage(message, encipheredMessage);
 		System.out.println("Enciphered message printed\n");	// TEST
 		
-		System.exit(0);	// or getSelection() 
+		System.exit(0);	// or clear everything and getSelection() 
 		
 	}	// end main method
 	
