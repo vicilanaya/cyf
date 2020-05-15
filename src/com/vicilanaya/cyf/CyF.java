@@ -1,5 +1,8 @@
 /**
- * 
+ * This application enciphers and deciphers a message 
+ * provided by the user by using a user-defined key.
+ * The user receives the enciphered or deciphered message 
+ * and the cipher square created from the key.
  */
 package com.vicilanaya.cyf;
 
@@ -74,7 +77,7 @@ public class CyF {
 		System.out.print("alphabet is: ");// TEST
 		System.out.println(alphabet);	// TEST
 		
-		String semiPreppedKey = prepInput(key);
+		String semiPreppedKey = prepInput1(key);
 		String preppedKey = stripDuplicates(semiPreppedKey);
 		System.out.println("prepped key is: " + preppedKey);	// TEST
 		
@@ -115,10 +118,10 @@ public class CyF {
 	}	// end linearSearch method
 
 	
-	private static String prepInput(String input) {	// CONTINUE HERE
+	private static String prepInput1(String input) {	// CONTINUE HERE
 		
 		String result = null;
-		// .toUpperCase()
+		result = input.toUpperCase();
 		// strip string of numbers, punctuation, spaces
 		// replace IJ
 		
@@ -172,21 +175,63 @@ public class CyF {
 	
 	
 	private static void encipheringMessage(String message) {	// CONTINUE HERE
-		String preppedMessage = prepInput(message);
-		// make array from string
+		String a = prepInput2(message);
+		
+		
 		// pair characters
-		// split pairs of duplicates
-		// add Z to last single character
 		// switch characters
+		// replace IJ
 		// group in 5 + space
 	}	// end encipheringMessage method
 	
-	
-	private static boolean isSameCharacter(Cell cell1, Cell cell2) {
-		if (cell1.getCharacter() == cell2.getCharacter())
-			return true;
-		return false;
+	private static String prepInput2(String input) {	// CONTINUE HERE
+		char[] a = prepInput1(input).toCharArray();
+		
+		ArrayList<Character> b = new ArrayList<>();	// CHECK PAGE 440, 391
+		for (char character : a) {
+			b.add(character);
+		}	// end foreach loop
+		
+		b.trimToSize();
+		if (b.size() % 2 != 0) {	// if size is not even number
+			b.add('Z');	// complete pair of last character by adding Z
+		}
+		System.out.println("b.size() = even number is " + (b.size() % 2 == 0));	// TEST
+		
+		for (int i = 0, j = 1; i < b.size(); ) {
+			if (b.get(i) == b.get(j)) {	// split pair of duplicates
+				if (b.get(i) == 'Z') {
+					b.add(j, 'A');	// insert A if duplicate character is A
+					b.add(j + 2, 'A');
+					i = i + 4;
+					j = i + 1;
+				}
+				else {
+					b.add(j, 'Z');	// insert Z if duplicate character is Z
+					b.add(j + 2, 'Z');
+					i = i + 4;
+					j = i + 1;
+				}	// end if else
+			}
+			else {
+				i++;
+				j++;
+			}	// end if else
+		}	// end for loop
+		
+		char[] c = null;
+		b.toArray();	// CHECK PAGE 440, 391
+		String d = null;
+		// convert array list to string
+		return d;
 	}
+	
+	
+//	private static boolean isSameCharacter(Character character1, Character character2) {
+//		if (character1 == character2)
+//			return true;
+//		return false;
+//	}
 	private static boolean isSameRow(Cell cell1, Cell cell2) {
 		if (cell1.getRow() == cell2.getRow())
 			return true;
@@ -244,7 +289,7 @@ class Cell {
 //	@Override
 	public String printCharacter() {
 		if (character == 'I' || character == 'J')	// CHECK IF THIS IS NEEDED
-			return 'I' + "";	// NEED TO SUBSTITUTE IJ CHARACTER
+			return 'I' + "";	// NEED TO SUBSTITUTE TO IJ CHARACTER
 		return character + "";
 	}
 	@Override
