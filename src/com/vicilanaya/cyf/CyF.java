@@ -26,7 +26,7 @@ public class CyF extends Exception {
 	static Scanner input = new Scanner(System.in);
 	static String message = null;
 	static String key = null;
-	static final char ij = '\u0132';
+	static final char IJ = '\u0132';
 	static char[] squareCharacters = new char[25];
 	static ArrayList<Cell> square  = new ArrayList<>();
 	static String encipheredMessage = null;
@@ -117,7 +117,7 @@ public class CyF extends Exception {
 	}	// end router method
 	
 	private static void prepKeyAlphabet(String key) {
-		char[] alphabet = {'A','B','C','D','E','F','G','H',ij,'K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+		char[] alphabet = {'A','B','C','D','E','F','G','H',IJ,'K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 		System.out.print("alphabet is: ");// TEST
 		System.out.println(alphabet);	// TEST
 		
