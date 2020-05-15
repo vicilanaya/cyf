@@ -7,6 +7,7 @@
 package com.vicilanaya.cyf;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -147,7 +148,7 @@ public class CyF {
 			square.add(new Cell(character, row, column, cellNumber));
 			System.out.println("built cell " + square.get(index).getCellNumber()  + " with character " + square.get(index).getCharacter() 
 					+ " in row " + square.get(index).getRow() + " and column " + square.get(index).getColumn());	// TEST
-			if (column % 5 == 0) {	// reset column if column is multiple of 5
+			if (column % 5 == 0) {	// reset column to 1 if column is multiple of 5
 				row++;
 				column = 1;
 				cellNumber++;
@@ -157,7 +158,7 @@ public class CyF {
 				column++;
 				cellNumber++;
 				index++;
-			}
+			}	// end if else
 		}	// end for loop
 		System.out.println("square built");	// TEST
 	}	// end buildSquare method
@@ -168,14 +169,15 @@ public class CyF {
 		System.out.println("Your crypto square:");
 		square.forEach(e -> {
 			System.out.print(" " + e.printCharacter() + " ");
-			if (e.getCellNumber() % 5 == 0)	// go to next line if cellNumber is multiple of 5
+			if (e.getCellNumber() % 5 == 0) {	// go to next line if cellNumber is multiple of 5
 				System.out.print("\n");
+		}
 		});	// end lambda expression
 	}	// end printSquare method
 	
 	
 	private static void encipheringMessage(String message) {	// CONTINUE HERE
-		String a = prepInput2(message);
+		ArrayList<Character> b = prepInput2(message);
 		
 		
 		// pair characters
@@ -184,47 +186,46 @@ public class CyF {
 		// group in 5 + space
 	}	// end encipheringMessage method
 	
-	private static String prepInput2(String input) {	// CONTINUE HERE
+	private static ArrayList<Character> prepInput2(String input) {
 		char[] a = prepInput1(input).toCharArray();
+		char alternate = 'Z';
 		
-		ArrayList<Character> b = new ArrayList<>();	// CHECK PAGE 440, 391
+		ArrayList<Character> b = new ArrayList<>();
 		for (char character : a) {
 			b.add(character);
-		}	// end foreach loop
+		}	// end for each loop
 		
+		/* complete pairs */
 		b.trimToSize();
 		if (b.size() % 2 != 0) {	// if size is not even number
-			b.add('Z');	// complete pair of last character by adding Z
+			if (b.get(b.size() - 1) == alternate) {	// use A as alternate if the duplicates equal Z
+				alternate = 'A';
+			}
+			b.add(alternate);	// complete pair of last character by adding alternate
+			alternate = 'Z';	// reset alternate to Z
 		}
 		System.out.println("b.size() = even number is " + (b.size() % 2 == 0));	// TEST
 		
+		/* eliminate pairs of duplicates */
 		for (int i = 0, j = 1; i < b.size(); ) {
-			if (b.get(i) == b.get(j)) {	// split pair of duplicates
-				if (b.get(i) == 'Z') {
-					b.add(j, 'A');	// insert A if duplicate character is A
-					b.add(j + 2, 'A');
-					i = i + 4;
-					j = i + 1;
+			if (b.get(i) == b.get(j)) {	// split duplicates
+				if (b.get(i) == alternate) {	// use A as alternate if the duplicates equal Z
+					alternate = 'A';
 				}
-				else {
-					b.add(j, 'Z');	// insert Z if duplicate character is Z
-					b.add(j + 2, 'Z');
-					i = i + 4;
-					j = i + 1;
-				}	// end if else
+				b.add(j, alternate);	// insert Z if duplicate character is Z
+				b.add(j + 2, alternate);
+				i = i + 4;	// skip split pair and alternates, go to next pair
+				j = i + 1;
+				alternate = 'Z';	// reset alternate to Z
 			}
-			else {
-				i++;
-				j++;
+			else {	// no duplicates
+				i = i + 2;	// go to next pair
+				j = j + 2;
 			}	// end if else
 		}	// end for loop
 		
-		char[] c = null;
-		b.toArray();	// CHECK PAGE 440, 391
-		String d = null;
-		// convert array list to string
-		return d;
-	}
+		return b;
+	}	// end prepInput2 method
 	
 	
 //	private static boolean isSameCharacter(Character character1, Character character2) {
