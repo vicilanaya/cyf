@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * @author Florence Vicil Anaya vicilanaya@gmail.com
+ * @author Florence Vicil Anaya Copyright 2020 vicilanaya@gmail.com
  *
  */
 public class CyF extends Exception {
@@ -48,13 +48,15 @@ public class CyF extends Exception {
 	}	// end main method
 	
 	private static void showIntro() {
-		System.out.println("Welcome to CyF. CyF is a cryptographic engine. Created by Florence Vicil Anaya.\n"
+		System.out.println("Welcome to CyF"
+				+ "CyF is a cryptographic engine created by Florence Vicil Anaya. (Copyright 2020)\n"
 				+ "This application enciphers and deciphers messages by using a key.\n" 
 				+ "You receive the enciphered or deciphered message\n"
 				+ "and the cipher square created from the key.");
 		System.out.println("This engine is currently limited to processing the following characters:\n"
 				+ "ABCDEFGHIJKLMNOPQRSTUVWXYZ.");
-		System.out.println("Numbers, punctuation, and symbols are ignored.");
+		System.out.println("Numbers, punctuation, and symbols are ignored.\n"
+				+ "The characters I and J will be treated as equals.");
 	}	// end intro method
 	
 	private static String showMenu() {
