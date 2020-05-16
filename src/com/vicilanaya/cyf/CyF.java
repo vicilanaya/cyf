@@ -297,8 +297,8 @@ public class CyF extends Exception {
 		/* complete pairs */
 		b.trimToSize();
 		if (b.size() % 2 != 0) {	// if size is not even number
-			if (b.get(b.size() - 1) == alternate) {	// use A as alternate if the duplicates equal Z
-				alternate = 'A';
+			if (b.get(b.size() - 1) == alternate) {	// use X as alternate if the duplicates equal Z
+				alternate = 'X';
 			}
 			b.add(alternate);	// complete pair of last character by adding alternate
 			alternate = 'Z';	// reset alternate to Z
@@ -308,8 +308,8 @@ public class CyF extends Exception {
 		/* eliminate pairs of duplicates */
 		for (int i = 0, j = 1; i < b.size(); ) {
 			if (b.get(i) == b.get(j)) {	// split duplicates
-				if (b.get(i) == alternate) {	// use A as alternate if the duplicates equal Z
-					alternate = 'A';
+				if (b.get(i) == alternate) {	// use X as alternate if the duplicates equal Z
+					alternate = 'X';
 				}
 				b.add(j, alternate);	// insert Z if duplicate character is Z
 				b.add(j + 2, alternate);
@@ -359,7 +359,7 @@ public class CyF extends Exception {
 }	// CyF class
 
 
-
+/** OBJECT CLASS */
 class Cell {
 //	class Cell implements Comparable<Cell>{
 	
