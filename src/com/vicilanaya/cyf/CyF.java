@@ -40,7 +40,7 @@ public class CyF extends Exception {
 		
 		/** obtain input */
 		System.out.println("Routing selection");	// TEST
-		router(getSelection());
+		getSelection();
 		
 		System.out.print("Thank you for using CyF. You may restart the program.");
 		System.exit(0);
@@ -67,31 +67,32 @@ public class CyF extends Exception {
 	}	// end showMenu method
 	
 
-	private static int getSelection() {	// THROW invalid input EXCEPTION
-		int selection = 0;
-		do {
-			showMenu();
-			System.out.print("Your selection: ");
-			selection = keyboardInput.nextInt();
-			if (selection < 0 || selection > 2) {
-				System.out.print("Your selection is not an option.");
-			}
-		} while (selection < 0 || selection > 3);
-		return selection;
+	private static void getSelection() {	// THROW invalid input EXCEPTION
+		int selection = 100;
+		while (true) {	// always show menu after execution of switch
+			do {
+				showMenu();
+				System.out.print("Your selection: ");
+				selection = keyboardInput.nextInt();
+				if (selection < 0 || selection > 4) {
+					System.out.print("Your selection is not an option.");
+				}
+			} while (selection < 0 || selection > 4);
+			
+			System.out.println("Switch started");	// TEST
+			switch (selection) {
+			case 0: System.out.print("Thank you for using CyF. You may restart the program.");
+					System.exit(1);
+			case 1: encipher(); break;
+			case 2: decipher(); break;
+			case 3: showInstructions(); break;
+			case 4: showHistory(); break;
+			}	// end switch
+			System.out.println("Switch ended");	// TEST
+		}	// end while loop
 	}	// end getOption method
 	
-	private static void router(int selection) {
-		System.out.println("Switch started");	// TEST
-		switch (selection) {
-		case 0: System.out.print("Thank you for using CyF. You may restart the program.");
-				System.exit(1);
-		case 1: encipher(); break;
-		case 2: decipher(); break;
-		case 3: showHistory(); break;
-		}	// end switch
-		System.out.println("Switch ended");	// TEST
-	}	// end router method
-	
+	/** option 1 */
 	private static void encipher() {
 		System.out.print("Enter the message you want to encipher: ");
 		message = keyboardInput.nextLine().trim();
@@ -124,6 +125,7 @@ public class CyF extends Exception {
 		
 	}	// end encipher method
 	
+	/** option 2 */
 	private static void decipher() {
 		System.out.print("Enter the message you want to decipher: ");
 		message = keyboardInput.nextLine().trim();
@@ -152,6 +154,12 @@ public class CyF extends Exception {
 		
 	}	// end decipher method
 	
+	/** option 3 */
+	private static void showInstructions() {	// CONTINUE HERE
+		// instructions
+	}	// end showInstructions method
+	
+	/** option 4 */
 	private static void showHistory() {
 		System.out.println("History of this project:\n\n"
 				+ "When I was little, I used to read the Encyclopedia Britannica.\n"
@@ -166,6 +174,7 @@ public class CyF extends Exception {
 				+ "This is how CyF was born.");
 	}	// end showHistory method
 
+	/** square */
 	private static void prepKeyAlphabet(String key) {
 		char[] alphabet = {'A','B','C','D','E','F','G','H',IJ,'K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 		System.out.print("alphabet is: ");// TEST
@@ -345,6 +354,7 @@ public class CyF extends Exception {
 		return false;
 	}	// end isSameColumn method
 
+	/** message */
 	private static void printEncipheredMessage(String message, String encipheredMessage) {
 		System.out.println("The original message is: ");
 		System.out.println(message);
