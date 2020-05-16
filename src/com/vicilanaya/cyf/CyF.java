@@ -23,7 +23,7 @@ public class CyF extends Exception {
 	 * @param args
 	 */
 
-	static Scanner input = new Scanner(System.in);
+	static Scanner keyboardInput = new Scanner(System.in);
 	static String message = null;
 	static String key = null;
 	static final char IJ = '\u0132';
@@ -72,7 +72,7 @@ public class CyF extends Exception {
 		do {
 			showMenu();
 			System.out.print("Your selection: ");
-			selection = input.nextInt();
+			selection = keyboardInput.nextInt();
 			if (selection < 0 || selection > 2) {
 				System.out.print("Your selection is not an option.");
 			}
@@ -94,12 +94,12 @@ public class CyF extends Exception {
 	
 	private static void encipher() {
 		System.out.print("Enter the message you want to encipher: ");
-		message = input.nextLine().trim();
+		message = keyboardInput.nextLine().trim();
 		System.out.println("message is: " + message);	// TEST
 		System.out.print("Enter your key (Shorter is better.): ");
-		key = input.nextLine().trim();
+		key = keyboardInput.nextLine().trim();
 		System.out.println("key is: " + key);	// TEST
-		input.close();
+		keyboardInput.close();
 		System.out.println("input closed");	// TEST
 
 		System.out.print("Prepping square elements");	// TEST
@@ -124,14 +124,14 @@ public class CyF extends Exception {
 		
 	}	// end encipher method
 	
-	private static void decipher() {	// CONTINUE HERE
+	private static void decipher() {
 		System.out.print("Enter the message you want to decipher: ");
-		message = input.nextLine().trim();
+		message = keyboardInput.nextLine().trim();
 		System.out.println("message is: " + message);	// TEST
 		System.out.print("Enter your key (Shorter is better.): ");
-		key = input.nextLine().trim();
+		key = keyboardInput.nextLine().trim();
 		System.out.println("key is: " + key);	// TEST
-		input.close();
+		keyboardInput.close();
 		System.out.println("input closed\n");	// TEST
 		
 		System.out.println("Building square");	// TEST
@@ -143,11 +143,11 @@ public class CyF extends Exception {
 		System.out.println("Square printed\n");	// TEST
 		
 		System.out.println("Processing enciphered message");	// TEST
-		decipheringMessage();	// CONTINUE HERE arguments
+		decipheringMessage(message);
 		System.out.println("Enciphered message processed = message deciphered\n");	// TEST
 		
 		System.out.println("Printing deciphered message");	// TEST
-		printDecipheredMessage();	// CONTINUE HERE arguments
+		printDecipheredMessage(message, decipheredMessage);
 		System.out.println("Deciphered message printed\n");	// TEST
 		
 	}	// end decipher method
@@ -217,6 +217,7 @@ public class CyF extends Exception {
 		String result = null;
 		result = input.toUpperCase();
 		// strip string of numbers, punctuation, spaces
+		// exception: massage must contain at least 1 of these letters
 		// replace IJ
 		
 		return result;
@@ -280,7 +281,7 @@ public class CyF extends Exception {
 	}	// end encipheringMessage method
 	
 	
-	private static void decipheringMessage() {	// CONTINUE HERE
+	private static void decipheringMessage(String message) {	// CONTINUE HERE
 		
 	}	// end decipheringMessage method
 	
@@ -352,10 +353,13 @@ public class CyF extends Exception {
 	}	// end printEncipheredMessage method
 	
 	
-	private static void printDecipheredMessage() {	// CONTINUE HERE
-		
+	private static void printDecipheredMessage(String message, String decipheredMessage) {
+		System.out.println("The original message is: ");
+		System.out.println(message);
+		System.out.println("The deciphered message is: ");
+		System.out.println(decipheredMessage);
 	}	// end printDecipheredMessage method
-		
+	
 }	// CyF class
 
 
