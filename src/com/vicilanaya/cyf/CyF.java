@@ -1,6 +1,5 @@
 /**
- * This application enciphers and deciphers a message 
- * provided by the user by using a user-defined key.
+ * This application enciphers and deciphers a message by using a key.
  * The user receives the enciphered or deciphered message 
  * and the cipher square created from the key.
  */
@@ -40,11 +39,8 @@ public class CyF extends Exception {
 		System.out.println("Intro shown");	// TEST
 		
 		/** obtain input */
-		System.out.println("Routing selection");	// TEST
+		System.out.println("Getting selection started");	// TEST
 		getSelection();
-		
-		System.out.print("Thank you for using CyF. You may restart the program.");
-		System.exit(0);
 		
 	}	// end main method
 	
@@ -60,14 +56,6 @@ public class CyF extends Exception {
 		System.out.println("Numbers, punctuation, and symbols will be ignored.\n"
 				+ "The characters I and J will be treated as equals.");
 	}	// end intro method
-	
-	private static String showMenu() {
-		return "Choose your option:\n"
-				+ "1 - Encipher a message\n"
-				+ "2 - Decipher a message\n"
-				+ "3 - Show history\n"
-				+ "0 - Exit application\n";
-	}	// end showMenu method
 	
 	private static void getSelection() {
 		int selection = 100;
@@ -108,6 +96,14 @@ public class CyF extends Exception {
 			System.out.println("End of content in while loop");	// TEST
 		}	// end while loop
 	}	// end getOption method
+	
+	private static String showMenu() {
+		return "Choose your option:\n"
+				+ "1 - Encipher a message\n"
+				+ "2 - Decipher a message\n"
+				+ "3 - Show history\n"
+				+ "0 - Exit application\n";
+	}	// end showMenu method
 	
 	/** option 1 */
 	private static void encipher() {
@@ -172,8 +168,16 @@ public class CyF extends Exception {
 	}	// end decipher method
 	
 	/** option 3 */
-	private static void showInstructions() {	// CONTINUE HERE
-		// instructions
+	private static void showInstructions() {
+		System.out.println("Instructions:\n"
+				+ "1. Select an option from the menu.\n"
+				+ "2. Enter the message you want to encipher or decipher.\n"
+				+ "3. Enter the cipher key.\n"
+				+ "4. The application will display\n"
+				+ "\tthe cipher key,\n"
+				+ "\tthe cipher square,\n"
+				+ "\tthe original message\n"
+				+ "\tthe enciphered or deciphered message.");
 	}	// end showInstructions method
 	
 	/** option 4 */
@@ -191,7 +195,7 @@ public class CyF extends Exception {
 				+ "This is how CyF was born.");
 	}	// end showHistory method
 
-	/** square */
+	/** square processing */
 	private static void prepKeyAlphabet(String key) {
 		char[] alphabet = {'A','B','C','D','E','F','G','H',IJ,'K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 		System.out.print("alphabet is: ");// TEST
@@ -253,7 +257,7 @@ public class CyF extends Exception {
 		System.out.println("square built");	// TEST
 	}	// end buildSquare method
 	
-	/** input */
+	/** input processing */
 	private static boolean linearSearch(char[] squareCharacters, char alphabetCharacter) {
 		for (int i = 0; i < squareCharacters.length; i++)
 			if (alphabetCharacter == squareCharacters[i])
@@ -333,7 +337,7 @@ public class CyF extends Exception {
 		return false;
 	}	// end isSameColumn method
 
-	/** message */
+	/** message processing */
 	private static void encipheringMessage(String message) {	// CONTINUE HERE
 		ArrayList<Character> b = prepInput2(message);
 		
@@ -422,4 +426,3 @@ class Cell {
 	}
 
 }	// end Cell class
-
