@@ -7,6 +7,7 @@
 package com.vicilanaya.cyf;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -47,6 +48,8 @@ public class CyF extends Exception {
 		
 	}	// end main method
 	
+
+	/** in main method */
 	private static void showIntro() {
 		System.out.println("*******Welcome to CyF*******"
 				+ "CyF is a cryptographic engine created by Florence Vicil Anaya. (Copyright 2020)\n"
@@ -66,17 +69,30 @@ public class CyF extends Exception {
 				+ "0 - Exit application\n";
 	}	// end showMenu method
 	
-
-	private static void getSelection() {	// THROW invalid input EXCEPTION
+	private static void getSelection() {
 		int selection = 100;
 		while (true) {	// always show menu after execution of switch
 			do {
+				System.out.println("Showing menu");	// TEST
 				showMenu();
+				System.out.println("Intro shown");	// TEST
 				System.out.print("Your selection: ");
-				selection = keyboardInput.nextInt();
-				if (selection < 0 || selection > 4) {
-					System.out.print("Your selection is not an option.");
+				try {
+					selection = keyboardInput.nextInt();	// input must be an integer
+					System.out.println("No exception after input");	// TEST
+					if (selection < 0 || selection > 4) {	// input must be 0, 1, 2, 3, 4
+						System.out.println("Your selection is not an option.");
+						keyboardInput.nextLine();	// discard input
+					}
 				}
+				catch (InputMismatchException exception) {
+					exception.printStackTrace();	// TEST
+					System.out.println("Your selection must be one of the following numbers:\n"
+							+ "1, 2, 3, 4 or 0 (no other characters or spaces allowed).");
+					keyboardInput.nextLine();	// discard input
+				}	// end try catch
+				System.out.println("Selection input captured");	// TEST
+				System.out.println("End of content in do while loop ends");	// TEST
 			} while (selection < 0 || selection > 4);
 			
 			System.out.println("Switch started");	// TEST
@@ -89,6 +105,7 @@ public class CyF extends Exception {
 			case 4: showHistory(); break;
 			}	// end switch
 			System.out.println("Switch ended");	// TEST
+			System.out.println("End of content in while loop");	// TEST
 		}	// end while loop
 	}	// end getOption method
 	
@@ -212,36 +229,6 @@ public class CyF extends Exception {
 		System.out.println(squareCharacters);	// TEST
 	}	// end prepKeyAlphabet method
 	
-	
-	private static boolean linearSearch(char[] squareCharacters, char alphabetCharacter) {
-		for (int i = 0; i < squareCharacters.length; i++)
-			if (alphabetCharacter == squareCharacters[i])
-				return true;
-		return false;
-	}	// end linearSearch method
-	
-
-	private static String prepInput1(String input) {	// CONTINUE HERE
-		
-		String result = null;
-		result = input.toUpperCase();
-		// strip string of numbers, punctuation, spaces
-		// exception: massage must contain at least 1 of these letters
-		// replace IJ
-		
-		return result;
-		
-	}	// end prepInput method
-	
-	
-	private static String stripDuplicates(String key) {	// CONTINUE HERE
-		
-		// strip duplicates
-		
-		return key;
-	}	// end stripDuplicates method
-	
-	
 	private static void buildSquare(char[] squareCharacters) {
 		int row = 1;
 		int column = 1;
@@ -266,34 +253,25 @@ public class CyF extends Exception {
 		System.out.println("square built");	// TEST
 	}	// end buildSquare method
 	
+	/** input */
+	private static boolean linearSearch(char[] squareCharacters, char alphabetCharacter) {
+		for (int i = 0; i < squareCharacters.length; i++)
+			if (alphabetCharacter == squareCharacters[i])
+				return true;
+		return false;
+	}	// end linearSearch method
 	
-	private static void printSquare(ArrayList<Cell> square, String key) {
-		System.out.println("Your key: " + key);
-		System.out.println("Your crypto square:");
-		square.forEach(e -> {
-			System.out.print(" " + e.printCharacter() + " ");
-			if (e.getCellNumber() % 5 == 0) {	// go to next line if cellNumber is multiple of 5
-				System.out.print("\n");
-			}
-		});	// end lambda expression
-	}	// end printSquare method
-	
-	
-	private static void encipheringMessage(String message) {	// CONTINUE HERE
-		ArrayList<Character> b = prepInput2(message);
+	private static String prepInput1(String input) {	// CONTINUE HERE
 		
-		
-		// pair characters
-		// switch characters
+		String result = null;
+		result = input.toUpperCase();
+		// strip string of numbers, punctuation, spaces
+		// exception: massage must contain at least 1 of these letters
 		// replace IJ
-		// group in 5 + space
-	}	// end encipheringMessage method
-	
-	
-	private static void decipheringMessage(String message) {	// CONTINUE HERE
 		
-	}	// end decipheringMessage method
-	
+		return result;
+		
+	}	// end prepInput method
 	
 	private static ArrayList<Character> prepInput2(String input) {
 		char[] a = prepInput1(input).toCharArray();
@@ -336,12 +314,13 @@ public class CyF extends Exception {
 		return b;
 	}	// end prepInput2 method
 	
-	
-//	private static boolean isSameCharacter(Character character1, Character character2) {
-//		if (character1 == character2)
-//			return true;
-//		return false;
-//	}
+	private static String stripDuplicates(String key) {	// CONTINUE HERE
+		
+		// strip duplicates
+		
+		return key;
+	}	// end stripDuplicates method
+		
 	private static boolean isSameRow(Cell cell1, Cell cell2) {
 		if (cell1.getRow() == cell2.getRow())
 			return true;
@@ -355,13 +334,38 @@ public class CyF extends Exception {
 	}	// end isSameColumn method
 
 	/** message */
+	private static void encipheringMessage(String message) {	// CONTINUE HERE
+		ArrayList<Character> b = prepInput2(message);
+		
+		
+		// pair characters
+		// switch characters
+		// replace IJ
+		// group in 5 + space
+	}	// end encipheringMessage method
+	
+	private static void decipheringMessage(String message) {	// CONTINUE HERE
+		
+	}	// end decipheringMessage method
+	
+	/** printing */
+	private static void printSquare(ArrayList<Cell> square, String key) {
+		System.out.println("Your key: " + key);
+		System.out.println("Your crypto square:");
+		square.forEach(e -> {
+			System.out.print(" " + e.printCharacter() + " ");
+			if (e.getCellNumber() % 5 == 0) {	// go to next line if cellNumber is multiple of 5
+				System.out.print("\n");
+			}
+		});	// end lambda expression
+	}	// end printSquare method
+	
 	private static void printEncipheredMessage(String message, String encipheredMessage) {
 		System.out.println("The original message is: ");
 		System.out.println(message);
 		System.out.println("The enciphered message is: ");
 		System.out.println(encipheredMessage);
 	}	// end printEncipheredMessage method
-	
 	
 	private static void printDecipheredMessage(String message, String decipheredMessage) {
 		System.out.println("The original message is: ");
