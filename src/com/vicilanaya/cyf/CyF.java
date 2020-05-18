@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import week09.Node;
+
 /**
  * @author Florence Vicil Anaya Copyright 2020 vicilanaya@gmail.com
  *
@@ -25,39 +27,39 @@ public class CyF extends Exception {
 	 * @param args
 	 */
 
-	static Cell A = new Cell('A', 0, 0, 0);
-	static Cell B = new Cell('B', 0, 0, 0);
-	static Cell C = new Cell('C', 0, 0, 0);
-	static Cell D = new Cell('D', 0, 0, 0);
-	static Cell E = new Cell('E', 0, 0, 0);
-	static Cell F = new Cell('F', 0, 0, 0);
-	static Cell G = new Cell('G', 0, 0, 0);
-	static Cell H = new Cell('H', 0, 0, 0);
-	static Cell IJ = new Cell('\u0132', 0, 0, 0);
-	static Cell K = new Cell('K', 0, 0, 0);
-	static Cell L = new Cell('L', 0, 0, 0);
-	static Cell M = new Cell('M', 0, 0, 0);
-	static Cell N = new Cell('N', 0, 0, 0);
-	static Cell O = new Cell('O', 0, 0, 0);
-	static Cell P = new Cell('P', 0, 0, 0);
-	static Cell Q = new Cell('Q', 0, 0, 0);
-	static Cell R = new Cell('R', 0, 0, 0);
-	static Cell S = new Cell('S', 0, 0, 0);
-	static Cell T = new Cell('T', 0, 0, 0);
-	static Cell U = new Cell('U', 0, 0, 0);
-	static Cell V = new Cell('V', 0, 0, 0);
-	static Cell W = new Cell('W', 0, 0, 0);
-	static Cell X = new Cell('X', 0, 0, 0);
-	static Cell Y = new Cell('Y', 0, 0, 0);
-	static Cell Z = new Cell('Z', 0, 0, 0);
-	static ArrayList<Cell> alphabetSquare  = new ArrayList<>();
+	static final char IJx = '\u0132';
+	static Cell A = new Cell('A');
+	static Cell B = new Cell('B');
+	static Cell C = new Cell('C');
+	static Cell D = new Cell('D');
+	static Cell E = new Cell('E');
+	static Cell F = new Cell('F');
+	static Cell G = new Cell('G');
+	static Cell H = new Cell('H');
+	static Cell IJ = new Cell(IJx);
+	static Cell K = new Cell('K');
+	static Cell L = new Cell('L');
+	static Cell M = new Cell('M');
+	static Cell N = new Cell('N');
+	static Cell O = new Cell('O');
+	static Cell P = new Cell('P');
+	static Cell Q = new Cell('Q');
+	static Cell R = new Cell('R');
+	static Cell S = new Cell('S');
+	static Cell T = new Cell('T');
+	static Cell U = new Cell('U');
+	static Cell V = new Cell('V');
+	static Cell W = new Cell('W');
+	static Cell X = new Cell('X');
+	static Cell Y = new Cell('Y');
+	static Cell Z = new Cell('Z');
+	static ArrayList<Cell> defaultSquare  = new ArrayList<>();
 			
 	static Scanner keyboardInput = new Scanner(System.in);
 	static String originalMessage = null;
 	static String originalKey = null;
 	static String validMessage = null;
 	static String validKey = null;
-	static final char IJx = '\u0132';
 	static char[] squareCharacters = new char[25];
 	static ArrayList<Cell> square  = new ArrayList<>();
 	static String encipheredMessage = null;
@@ -65,33 +67,9 @@ public class CyF extends Exception {
 	
 	public static void main(String[] args) {
 		
-		System.out.println("Building alphabetSquare");	// TEST
-		alphabetSquare.add(A);
-		alphabetSquare.add(B);
-		alphabetSquare.add(C);
-		alphabetSquare.add(D);
-		alphabetSquare.add(E);
-		alphabetSquare.add(F);
-		alphabetSquare.add(G);
-		alphabetSquare.add(H);
-		alphabetSquare.add(IJ);
-		alphabetSquare.add(K);
-		alphabetSquare.add(L);
-		alphabetSquare.add(M);
-		alphabetSquare.add(N);
-		alphabetSquare.add(O);
-		alphabetSquare.add(P);
-		alphabetSquare.add(Q);
-		alphabetSquare.add(R);
-		alphabetSquare.add(S);
-		alphabetSquare.add(T);
-		alphabetSquare.add(U);
-		alphabetSquare.add(V);
-		alphabetSquare.add(W);
-		alphabetSquare.add(X);
-		alphabetSquare.add(Y);
-		alphabetSquare.add(Z);
-		System.out.println("alphabetSquare built");	// TEST
+		System.out.println("Building defaultSquare");	// TEST
+		buildDefaultSquare(A,B,C,D,E,F,G,H,IJ,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z);
+		System.out.println("defaultSquare built");	// TEST
 		
 		System.out.println("Showing intro");	// TEST
 		showIntro();
@@ -102,8 +80,12 @@ public class CyF extends Exception {
 		
 	}	// end main method
 	
-
 	/** in main method */
+	private static void buildDefaultSquare(Cell...cells) {
+		for (Cell element : cells)
+			defaultSquare.add(element);
+	}	// end buildDefaultSquare method
+
 	private static String showIntro() {
 		return "*******Welcome to CyF*******\n"
 				+ "CyF is a cryptographic engine created by Florence Vicil Anaya. (Copyright 2020)\n"
@@ -114,6 +96,14 @@ public class CyF extends Exception {
 				+ "Numbers, punctuation, and symbols will be ignored.\n"
 				+ "The characters I and J will be treated as equals.\n";
 	}	// end showIntro method
+	
+	private static String showMenu() {
+		return "Choose your option:\n"
+				+ "1 - Encipher a message\n"
+				+ "2 - Decipher a message\n"
+				+ "3 - Show history\n"
+				+ "0 - Exit application\n";
+	}	// end showMenu method
 	
 	private static void getSelection() {
 		Integer selection = 100;	// Integer (not int) so that it can be compared to null
@@ -152,14 +142,6 @@ public class CyF extends Exception {
 			System.out.println("End of content in while loop");	// TEST
 		} while (true);	// always show menu after execution of switch
 	}	// end getSelection method
-	
-	private static String showMenu() {
-		return "Choose your option:\n"
-				+ "1 - Encipher a message\n"
-				+ "2 - Decipher a message\n"
-				+ "3 - Show history\n"
-				+ "0 - Exit application\n";
-	}	// end showMenu method
 	
 	/** option 1 */
 	private static void encipher() {
@@ -272,7 +254,7 @@ public class CyF extends Exception {
 		return validInput;
 	}	// end getInput method
 	
-	private static ArrayList<Character> prepMessage(String validMessage) {	// for message
+	private static ArrayList<Character> prepMessage(String validMessage) {
 		char[] a = validMessage.toCharArray();
 		char alternate = 'Z';
 		
@@ -364,28 +346,38 @@ public class CyF extends Exception {
 		return false;
 	}	// end linearSearch method
 	
-	private static void buildSquare(char[] squareCharacters) {	// FIX LOGIC
+	private static void buildSquare(char[] squareCharacters) {
 		int row = 1;
 		int column = 1;
 		int cellNumber = 1;
 		int index = 0;
+		ArrayList<Cell> tempSquare = (ArrayList<Cell>)defaultSquare.clone();	// make a copy of defaultSquare to hold unsorted cells
+		System.out.println("defaultSquare cloned into tempSquare");	// TEST
 		for (char character : squareCharacters) {
-			square.add(new Cell(character, row, column, cellNumber));
-			System.out.println("built cell " + square.get(index).getCellNumber()  + " with character " + square.get(index).getCharacter() 
-					+ " in row " + square.get(index).getRow() + " and column " + square.get(index).getColumn());	// TEST
+			index = tempSquare.indexOf(character);	// index of cell with this character
+			Cell cell = tempSquare.get(index);	// cell with this index
+			cell.setRow(row);
+			cell.setColumn(column);
+			cell.setCellNumber(cellNumber);
+			System.out.println("Attributes added to cell at index " + index + ": " + cell.toString());	// TEST
 			if (column % 5 == 0) {	// reset column to 1 if column is multiple of 5
 				row++;
 				column = 1;
 				cellNumber++;
-				index++;
 			}
 			else {
 				column++;
 				cellNumber++;
-				index++;
 			}	// end if else
 		}	// end for loop
+		
+		System.out.println("Attributes added to cells in defaultSquare");	// TEST
+		java.util.Collections.sort(tempSquare);
+		System.out.println("tempSquare sorted");	// TEST
+		square = (ArrayList<Cell>)tempSquare.clone();	// CloneNotSupportedException
+		System.out.println("tempSquare cloned into square");	// TEST
 		System.out.println("square built");	// TEST
+			
 	}	// end buildSquare method
 	
 	/** message processing */
@@ -395,21 +387,43 @@ public class CyF extends Exception {
 		ArrayList<Character> b = prepMessage(validMessage);	// prepped message
 //		ArrayList<Character> c = new ArrayList<>();
 //		char[] temp = new char[2];
-		for (int fromIndex = 0, toIndex = 1; fromIndex < b.size(); ) {
-			List<Character> subList = b.subList(fromIndex, toIndex);	// sublist of each pair
-			int x = square.indexOf(subList.get(0));
-			int y = square.indexOf(subList.get(0));
-			int m = square.indexOf(subList.get(0));
-			int n = square.indexOf(subList.get(0));
+//		for (int fromIndex = 0, toIndex = 1; fromIndex < b.size(); ) {
+//			List<Character> subList = b.subList(fromIndex, toIndex);	// sublist of each pair
+//			int x = square.indexOf(subList.get(0));
+//			int y = square.indexOf(subList.get(0));
+//			int m = square.indexOf(subList.get(0));
+//			int n = square.indexOf(subList.get(0));
+//		}	// end for loop
+		
+		Character char0 = null;	// Character pair in message
+		Character char1 = null;
+		int index0 = 0;
+		int index1 = 0;
+		Cell cell0 = null;	// Cell pair in square
+		Cell cell1 = null;
+		for (int i = 0, j = 0; i < b.size(); ) {
+			char0 = b.get(i);	// get Character pair in b
+			char1 = b.get(j);
+			index0 = square.indexOf(valueOf(char0));	// find index of character in square
+			index1 = square.indexOf(char1);
+			cell0 = square.get(index0);	// get Cell pair in square
+			cell1 = square.get(index1);
+			
+			if (isSameRow(cell0, cell1)) {
+				cell0.getCellNumber();
+				cell1.getCellNumber();
+			}
+			if (isSameColumn(cell0, cell1)) {
+				
+			}
+			else {	// different row and different column
+				
+			}
 		}	// end for loop
+//		b.indexOf(character);
 		
-		// set row, column, cellNumber of Cells in alphabetSquare
-		// copy alphabetSquare to square
-		// sort square by cellNumber
 		
-		// get character pair in b
-		// find character pair in square
-		// isSameRow, isSameColumn
+		
 		// switch characters = calculate new cellNumbers
 		// get characters from new cellNumbers
 		// add new pair to preEncipheredMessage
@@ -422,14 +436,14 @@ public class CyF extends Exception {
 		
 	}	// end decipheringMessage method
 	
-	private static boolean isSameRow(Cell cell1, Cell cell2) {
-		if (cell1.getRow() == cell2.getRow())
+	private static boolean isSameRow(Cell cell0, Cell cell1) {
+		if (cell0.getRow() == cell1.getRow())
 			return true;
 		return false;
 	}	// end isSameRow method
 	
-	private static boolean isSameColumn(Cell cell1, Cell cell2) {
-		if (cell1.getColumn() == cell2.getColumn())
+	private static boolean isSameColumn(Cell cell0, Cell cell1) {
+		if (cell0.getColumn() == cell1.getColumn())
 			return true;
 		return false;
 	}	// end isSameColumn method
@@ -463,22 +477,35 @@ public class CyF extends Exception {
 }	// CyF class
 
 
-/** OBJECT CLASS */
-//class Cell {
+/** SERVICE CLASS */
 class Cell implements Comparable<Cell>{
 	
-	private char character = '\u0000';
-	private int row = 1;
-	private int column = 1;
-	private int cellNumber = 1;
+	private char character;
+	private int row;
+	private int column;
+	private int cellNumber;
+	public static final char DEFAULT_CHARACTER = '\u0000';
+	public static final int DEFAULT_ROW = 0;
+	public static final int DEFAULT_COLUMN = 0;
+	public static final int DEFAULT_CELL_NUMBER = 0;
 	
-	Cell(char character, int row, int column, int cellNumber) {	// fix constructor with default values
-		this.character = character;
-		this.row = row;
-		this.column = column;
-		this.cellNumber = cellNumber;
+	Cell(char character, int row, int column, int cellNumber) {
+		this.character = DEFAULT_CHARACTER;
+		this.row = DEFAULT_ROW;
+		this.column = DEFAULT_COLUMN;
+		this.cellNumber = DEFAULT_CELL_NUMBER;
+		setCharacter(character);
+		setRow(row);
+		setColumn(column);
+		setCellNumber(cellNumber);
 	}	// end constructor
-
+	Cell() {
+		this(DEFAULT_CHARACTER, DEFAULT_ROW, DEFAULT_COLUMN, DEFAULT_CELL_NUMBER);
+	}	// end constructor
+	Cell(char character) {
+		this(character, DEFAULT_ROW, DEFAULT_COLUMN, DEFAULT_CELL_NUMBER);
+	}	// end constructor
+	
 	public char getCharacter() {
 		return character;
 	}
@@ -506,7 +533,13 @@ class Cell implements Comparable<Cell>{
 
 	@Override
 	public int compareTo(Cell cell) {
-		return cellNumber - cell.cellNumber;
+//		return cellNumber - cell.cellNumber;
+		if (cellNumber > cell.cellNumber)
+			return 1;
+		else if (cellNumber < cell.cellNumber)
+			return -1;
+		else
+			return 0;
 	}
 	public String printCharacter() {
 		if (character == 'I' || character == 'J')	// CHECK IF THIS IS NEEDED
