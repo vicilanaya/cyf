@@ -7,6 +7,8 @@ package com.vicilanaya.cyf;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -23,10 +25,39 @@ public class CyF extends Exception {
 	 * @param args
 	 */
 
+	static Cell A = new Cell('A', 0, 0, 0);
+	static Cell B = new Cell('B', 0, 0, 0);
+	static Cell C = new Cell('C', 0, 0, 0);
+	static Cell D = new Cell('D', 0, 0, 0);
+	static Cell E = new Cell('E', 0, 0, 0);
+	static Cell F = new Cell('F', 0, 0, 0);
+	static Cell G = new Cell('G', 0, 0, 0);
+	static Cell H = new Cell('H', 0, 0, 0);
+	static Cell IJ = new Cell('\u0132', 0, 0, 0);
+	static Cell K = new Cell('K', 0, 0, 0);
+	static Cell L = new Cell('L', 0, 0, 0);
+	static Cell M = new Cell('M', 0, 0, 0);
+	static Cell N = new Cell('N', 0, 0, 0);
+	static Cell O = new Cell('O', 0, 0, 0);
+	static Cell P = new Cell('P', 0, 0, 0);
+	static Cell Q = new Cell('Q', 0, 0, 0);
+	static Cell R = new Cell('R', 0, 0, 0);
+	static Cell S = new Cell('S', 0, 0, 0);
+	static Cell T = new Cell('T', 0, 0, 0);
+	static Cell U = new Cell('U', 0, 0, 0);
+	static Cell V = new Cell('V', 0, 0, 0);
+	static Cell W = new Cell('W', 0, 0, 0);
+	static Cell X = new Cell('X', 0, 0, 0);
+	static Cell Y = new Cell('Y', 0, 0, 0);
+	static Cell Z = new Cell('Z', 0, 0, 0);
+	static ArrayList<Cell> alphabetSquare  = new ArrayList<>();
+			
 	static Scanner keyboardInput = new Scanner(System.in);
-	static String message = null;
-	static String key = null;
-	static final char IJ = '\u0132';
+	static String originalMessage = null;
+	static String originalKey = null;
+	static String validMessage = null;
+	static String validKey = null;
+	static final char IJx = '\u0132';
 	static char[] squareCharacters = new char[25];
 	static ArrayList<Cell> square  = new ArrayList<>();
 	static String encipheredMessage = null;
@@ -34,11 +65,38 @@ public class CyF extends Exception {
 	
 	public static void main(String[] args) {
 		
+		System.out.println("Building alphabetSquare");	// TEST
+		alphabetSquare.add(A);
+		alphabetSquare.add(B);
+		alphabetSquare.add(C);
+		alphabetSquare.add(D);
+		alphabetSquare.add(E);
+		alphabetSquare.add(F);
+		alphabetSquare.add(G);
+		alphabetSquare.add(H);
+		alphabetSquare.add(IJ);
+		alphabetSquare.add(K);
+		alphabetSquare.add(L);
+		alphabetSquare.add(M);
+		alphabetSquare.add(N);
+		alphabetSquare.add(O);
+		alphabetSquare.add(P);
+		alphabetSquare.add(Q);
+		alphabetSquare.add(R);
+		alphabetSquare.add(S);
+		alphabetSquare.add(T);
+		alphabetSquare.add(U);
+		alphabetSquare.add(V);
+		alphabetSquare.add(W);
+		alphabetSquare.add(X);
+		alphabetSquare.add(Y);
+		alphabetSquare.add(Z);
+		System.out.println("alphabetSquare built");	// TEST
+		
 		System.out.println("Showing intro");	// TEST
 		showIntro();
 		System.out.println("Intro shown");	// TEST
-		
-		/** obtain input */
+
 		System.out.println("Getting selection started");	// TEST
 		getSelection();
 		
@@ -46,20 +104,20 @@ public class CyF extends Exception {
 	
 
 	/** in main method */
-	private static void showIntro() {
-		System.out.println("*******Welcome to CyF*******"
+	private static String showIntro() {
+		return "*******Welcome to CyF*******\n"
 				+ "CyF is a cryptographic engine created by Florence Vicil Anaya. (Copyright 2020)\n"
 				+ "This application enciphers and deciphers messages by using a key. You receive\n" 
-				+ "the enciphered or deciphered message and the cipher square created from the key.\n");
-		System.out.println("This engine is currently limited to processing the following characters:\n"
-				+ "ABCDEFGHIJKLMNOPQRSTUVWXYZ.");
-		System.out.println("Numbers, punctuation, and symbols will be ignored.\n"
-				+ "The characters I and J will be treated as equals.");
-	}	// end intro method
+				+ "the enciphered or deciphered message and the cipher square created from the key.\n"
+				+ "This engine is currently limited to processing the following characters:\n"
+				+ "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.\n"
+				+ "Numbers, punctuation, and symbols will be ignored.\n"
+				+ "The characters I and J will be treated as equals.\n";
+	}	// end showIntro method
 	
 	private static void getSelection() {
-		int selection = 100;
-		while (true) {	// always show menu after execution of switch
+		Integer selection = 100;	// Integer (not int) so that it can be compared to null
+		do {
 			do {
 				System.out.println("Showing menu");	// TEST
 				showMenu();
@@ -67,9 +125,8 @@ public class CyF extends Exception {
 				System.out.print("Your selection: ");
 				try {
 					selection = keyboardInput.nextInt();	// input must be an integer
-					System.out.println("No exception after input");	// TEST
-					if (selection < 0 || selection > 4) {	// input must be 0, 1, 2, 3, 4
-						System.out.println("Your selection is not an option.");
+					if (selection < 0 || selection > 4 || selection == null) {	// input must be 0, 1, 2, 3 or 4
+						System.out.println("Your selection is not an option and cannot be null.");
 						keyboardInput.nextLine();	// discard input
 					}
 				}
@@ -79,9 +136,8 @@ public class CyF extends Exception {
 							+ "1, 2, 3, 4 or 0 (no other characters or spaces allowed).");
 					keyboardInput.nextLine();	// discard input
 				}	// end try catch
-				System.out.println("Selection input captured");	// TEST
 				System.out.println("End of content in do while loop ends");	// TEST
-			} while (selection < 0 || selection > 4);
+			} while (selection < 0 || selection > 4 || selection == null);
 			
 			System.out.println("Switch started");	// TEST
 			switch (selection) {
@@ -94,8 +150,8 @@ public class CyF extends Exception {
 			}	// end switch
 			System.out.println("Switch ended");	// TEST
 			System.out.println("End of content in while loop");	// TEST
-		}	// end while loop
-	}	// end getOption method
+		} while (true);	// always show menu after execution of switch
+	}	// end getSelection method
 	
 	private static String showMenu() {
 		return "Choose your option:\n"
@@ -108,16 +164,14 @@ public class CyF extends Exception {
 	/** option 1 */
 	private static void encipher() {
 		System.out.print("Enter the message you want to encipher: ");
-		message = keyboardInput.nextLine().trim();
-		System.out.println("message is: " + message);	// TEST
+		validMessage = getInput("message");
 		System.out.print("Enter your key (Shorter is better.): ");
-		key = keyboardInput.nextLine().trim();
-		System.out.println("key is: " + key);	// TEST
+		validKey = getInput("key");
 		keyboardInput.close();
-		System.out.println("input closed");	// TEST
-
+		System.out.println("keyboardInput closed");	// TEST
+		
 		System.out.print("Prepping square elements");	// TEST
-		prepKeyAlphabet(key);
+		prepKeyAlphabet(validKey);
 		System.out.println("Square elements prepped\n");	// TEST
 
 		System.out.println("Building square");	// TEST
@@ -125,46 +179,46 @@ public class CyF extends Exception {
 		System.out.println("Square built\n");	// TEST
 
 		System.out.println("Printing square");	// TEST
-		printSquare(square, key);
+		printSquare(square, originalKey);
 		System.out.println("Square printed\n");	// TEST
 
 		System.out.println("Processing deciphered message");	// TEST
-		encipheringMessage(message);
+		encipheringMessage(validMessage);
 		System.out.println("Deciphered message processed = message enciphered\n");	// TEST
 
 		System.out.println("Printing enciphered message");	// TEST
-		printEncipheredMessage(message, encipheredMessage);
+		printEncipheredMessage(originalMessage, encipheredMessage);
 		System.out.println("Enciphered message printed\n");	// TEST
-		
 	}	// end encipher method
 	
 	/** option 2 */
 	private static void decipher() {
 		System.out.print("Enter the message you want to decipher: ");
-		message = keyboardInput.nextLine().trim();
-		System.out.println("message is: " + message);	// TEST
+		validMessage = getInput("message");
 		System.out.print("Enter your key (Shorter is better.): ");
-		key = keyboardInput.nextLine().trim();
-		System.out.println("key is: " + key);	// TEST
+		validKey = getInput("key");
 		keyboardInput.close();
-		System.out.println("input closed\n");	// TEST
+		System.out.println("keyboardInput closed");	// TEST
+		
+		System.out.print("Prepping square elements");	// TEST
+		prepKeyAlphabet(validKey);
+		System.out.println("Square elements prepped\n");	// TEST
 		
 		System.out.println("Building square");	// TEST
 		buildSquare(squareCharacters);
 		System.out.println("Square built\n");	// TEST
 
 		System.out.println("Printing square");	// TEST
-		printSquare(square, key);
+		printSquare(square, originalKey);
 		System.out.println("Square printed\n");	// TEST
 		
 		System.out.println("Processing enciphered message");	// TEST
-		decipheringMessage(message);
+		decipheringMessage(validMessage);
 		System.out.println("Enciphered message processed = message deciphered\n");	// TEST
 		
 		System.out.println("Printing deciphered message");	// TEST
-		printDecipheredMessage(message, decipheredMessage);
+		printDecipheredMessage(originalMessage, decipheredMessage);
 		System.out.println("Deciphered message printed\n");	// TEST
-		
 	}	// end decipher method
 	
 	/** option 3 */
@@ -182,7 +236,7 @@ public class CyF extends Exception {
 	
 	/** option 4 */
 	private static void showHistory() {
-		System.out.println("History of this project:\n\n"
+		System.out.println("History of the CyF project:\n"
 				+ "When I was little, I used to read the Encyclopedia Britannica.\n"
 				+ "I used to look stuff up about brownies, the human body,\n"
 				+ "and number theory. One time I stumbled upon cryptography.\n"
@@ -195,14 +249,84 @@ public class CyF extends Exception {
 				+ "This is how CyF was born.");
 	}	// end showHistory method
 
+	/** valid input processing */
+	private static String getInput(String whichInput) {	// get and clean key and message
+		String validInput = null;
+		do {
+			try {
+				validInput = keyboardInput.nextLine().trim().replaceAll("[^a-zA-Z]", "").toUpperCase();	// clean input
+				// eliminate non-letters (numbers, punctuation, spaces)
+				System.out.println(whichInput + " is: " + validInput);	// TEST
+				if (validInput == null || validInput == "") {
+					System.out.println("Your " + whichInput + " must contain letters. Enter your " + whichInput + " again: ");
+					validInput = null;
+				}
+			}
+			catch (NoSuchElementException exception2) {
+				exception2.printStackTrace();
+				System.out.println("Your " + whichInput + " must contain letters. Enter your " + whichInput + " again: ");
+				validInput = null;
+			}	// end try catch
+		} while (validInput == null);	// end do while loop
+		
+		return validInput;
+	}	// end getInput method
+	
+	private static ArrayList<Character> prepMessage(String validMessage) {	// for message
+		char[] a = validMessage.toCharArray();
+		char alternate = 'Z';
+		
+		ArrayList<Character> b = new ArrayList<>();	// this is returned
+		for (char character : a) {
+			b.add(character);
+		}	// end for each loop
+		
+		/* complete last pair */
+		b.trimToSize();
+		if (b.size() % 2 != 0) {	// if size is not even number
+			if (b.get(b.size() - 1) == alternate) {	// use X as alternate if character equals Z
+				alternate = 'X';
+			}
+			b.add(alternate);	// complete last pair by adding alternate
+			alternate = 'Z';	// reset alternate to Z
+		}
+		System.out.println("b.size() = even number is " + (b.size() % 2 == 0));	// TEST
+		
+		/* eliminate pairs of duplicates */
+		for (int i = 0, j = 1; i < b.size(); ) {
+			if (b.get(i) == b.get(j)) {	// split duplicates
+				if (b.get(i) == alternate) {	// use X as alternate if the duplicates equal Z
+					alternate = 'X';
+				}
+				b.add(j, alternate);	// insert Z if duplicate character is Z
+				b.add(j + 2, alternate);
+				i = i + 4;	// skip new split pair and alternates, go to next pair
+				j = i + 1;
+				alternate = 'Z';	// reset alternate to Z
+			}
+			else {	// no duplicates
+				i = i + 2;	// go to next pair
+				j = j + 2;
+			}	// end if else
+		}	// end for loop
+		
+		return b;	// ArrayList<Character> prepped message ready to be enciphered/deciphered
+	}	// end prepMessage method
+	
+	private static String stripDuplicates(String validKey) {	// CONTINUE HERE
+		
+		// strip duplicates
+		
+		return validKey;
+	}	// end stripDuplicates method
+	
 	/** square processing */
-	private static void prepKeyAlphabet(String key) {
-		char[] alphabet = {'A','B','C','D','E','F','G','H',IJ,'K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+	private static void prepKeyAlphabet(String validKey) {
+		char[] alphabet = {'A','B','C','D','E','F','G','H',IJx,'K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 		System.out.print("alphabet is: ");// TEST
 		System.out.println(alphabet);	// TEST
 		
-		String semiPreppedKey = prepInput1(key);
-		String preppedKey = stripDuplicates(semiPreppedKey);
+		String preppedKey = stripDuplicates(validKey);
 		System.out.println("prepped key is: " + preppedKey);	// TEST
 		
 		int i;	// count key character elements
@@ -233,7 +357,14 @@ public class CyF extends Exception {
 		System.out.println(squareCharacters);	// TEST
 	}	// end prepKeyAlphabet method
 	
-	private static void buildSquare(char[] squareCharacters) {
+	private static boolean linearSearch(char[] squareCharacters, char alphabetCharacter) {
+		for (int i = 0; i < squareCharacters.length; i++)
+			if (alphabetCharacter == squareCharacters[i])
+				return true;
+		return false;
+	}	// end linearSearch method
+	
+	private static void buildSquare(char[] squareCharacters) {	// FIX LOGIC
 		int row = 1;
 		int column = 1;
 		int cellNumber = 1;
@@ -257,74 +388,40 @@ public class CyF extends Exception {
 		System.out.println("square built");	// TEST
 	}	// end buildSquare method
 	
-	/** input processing */
-	private static boolean linearSearch(char[] squareCharacters, char alphabetCharacter) {
-		for (int i = 0; i < squareCharacters.length; i++)
-			if (alphabetCharacter == squareCharacters[i])
-				return true;
-		return false;
-	}	// end linearSearch method
-	
-	private static String prepInput1(String input) {	// CONTINUE HERE
-		
-		String result = null;
-		result = input.toUpperCase();
-		// strip string of numbers, punctuation, spaces
-		// exception: massage must contain at least 1 of these letters
-		// replace IJ
-		
-		return result;
-		
-	}	// end prepInput method
-	
-	private static ArrayList<Character> prepInput2(String input) {
-		char[] a = prepInput1(input).toCharArray();
-		char alternate = 'Z';
-		
-		ArrayList<Character> b = new ArrayList<>();
-		for (char character : a) {
-			b.add(character);
-		}	// end for each loop
-		
-		/* complete pairs */
-		b.trimToSize();
-		if (b.size() % 2 != 0) {	// if size is not even number
-			if (b.get(b.size() - 1) == alternate) {	// use X as alternate if the duplicates equal Z
-				alternate = 'X';
-			}
-			b.add(alternate);	// complete pair of last character by adding alternate
-			alternate = 'Z';	// reset alternate to Z
-		}
-		System.out.println("b.size() = even number is " + (b.size() % 2 == 0));	// TEST
-		
-		/* eliminate pairs of duplicates */
-		for (int i = 0, j = 1; i < b.size(); ) {
-			if (b.get(i) == b.get(j)) {	// split duplicates
-				if (b.get(i) == alternate) {	// use X as alternate if the duplicates equal Z
-					alternate = 'X';
-				}
-				b.add(j, alternate);	// insert Z if duplicate character is Z
-				b.add(j + 2, alternate);
-				i = i + 4;	// skip split pair and alternates, go to next pair
-				j = i + 1;
-				alternate = 'Z';	// reset alternate to Z
-			}
-			else {	// no duplicates
-				i = i + 2;	// go to next pair
-				j = j + 2;
-			}	// end if else
+	/** message processing */
+	private static void encipheringMessage(String validMessage) {	// CONTINUE HERE	// FIX LOGIC
+//		ArrayList<Character> b = new ArrayList<>();
+//		b = prepMessage(validMessage);
+		ArrayList<Character> b = prepMessage(validMessage);	// prepped message
+//		ArrayList<Character> c = new ArrayList<>();
+//		char[] temp = new char[2];
+		for (int fromIndex = 0, toIndex = 1; fromIndex < b.size(); ) {
+			List<Character> subList = b.subList(fromIndex, toIndex);	// sublist of each pair
+			int x = square.indexOf(subList.get(0));
+			int y = square.indexOf(subList.get(0));
+			int m = square.indexOf(subList.get(0));
+			int n = square.indexOf(subList.get(0));
 		}	// end for loop
 		
-		return b;
-	}	// end prepInput2 method
+		// set row, column, cellNumber of Cells in alphabetSquare
+		// copy alphabetSquare to square
+		// sort square by cellNumber
+		
+		// get character pair in b
+		// find character pair in square
+		// isSameRow, isSameColumn
+		// switch characters = calculate new cellNumbers
+		// get characters from new cellNumbers
+		// add new pair to preEncipheredMessage
+		// group in 5 + space
+		// return enciphered message
+		// replace IJ
+	}	// end encipheringMessage method
 	
-	private static String stripDuplicates(String key) {	// CONTINUE HERE
+	private static void decipheringMessage(String validMessage) {	// CONTINUE HERE
 		
-		// strip duplicates
-		
-		return key;
-	}	// end stripDuplicates method
-		
+	}	// end decipheringMessage method
+	
 	private static boolean isSameRow(Cell cell1, Cell cell2) {
 		if (cell1.getRow() == cell2.getRow())
 			return true;
@@ -337,24 +434,9 @@ public class CyF extends Exception {
 		return false;
 	}	// end isSameColumn method
 
-	/** message processing */
-	private static void encipheringMessage(String message) {	// CONTINUE HERE
-		ArrayList<Character> b = prepInput2(message);
-		
-		
-		// pair characters
-		// switch characters
-		// replace IJ
-		// group in 5 + space
-	}	// end encipheringMessage method
-	
-	private static void decipheringMessage(String message) {	// CONTINUE HERE
-		
-	}	// end decipheringMessage method
-	
 	/** printing */
-	private static void printSquare(ArrayList<Cell> square, String key) {
-		System.out.println("Your key: " + key);
+	private static void printSquare(ArrayList<Cell> square, String originalKey) {
+		System.out.println("Your key: " + originalKey);
 		System.out.println("Your crypto square:");
 		square.forEach(e -> {
 			System.out.print(" " + e.printCharacter() + " ");
@@ -364,16 +446,16 @@ public class CyF extends Exception {
 		});	// end lambda expression
 	}	// end printSquare method
 	
-	private static void printEncipheredMessage(String message, String encipheredMessage) {
+	private static void printEncipheredMessage(String originalMessage, String encipheredMessage) {
 		System.out.println("The original message is: ");
-		System.out.println(message);
+		System.out.println(originalMessage);
 		System.out.println("The enciphered message is: ");
 		System.out.println(encipheredMessage);
 	}	// end printEncipheredMessage method
 	
-	private static void printDecipheredMessage(String message, String decipheredMessage) {
+	private static void printDecipheredMessage(String originalMessage, String decipheredMessage) {
 		System.out.println("The original message is: ");
-		System.out.println(message);
+		System.out.println(originalMessage);
 		System.out.println("The deciphered message is: ");
 		System.out.println(decipheredMessage);
 	}	// end printDecipheredMessage method
@@ -382,15 +464,15 @@ public class CyF extends Exception {
 
 
 /** OBJECT CLASS */
-class Cell {
-//	class Cell implements Comparable<Cell>{
+//class Cell {
+class Cell implements Comparable<Cell>{
 	
 	private char character = '\u0000';
 	private int row = 1;
 	private int column = 1;
 	private int cellNumber = 1;
 	
-	Cell(char character, int row, int column, int cellNumber) {
+	Cell(char character, int row, int column, int cellNumber) {	// fix constructor with default values
 		this.character = character;
 		this.row = row;
 		this.column = column;
@@ -409,11 +491,23 @@ class Cell {
 	public int getCellNumber() {
 		return cellNumber;
 	}
+	public void setCharacter(char character) {
+		this.character = character;
+	}
+	public void setRow(int row) {
+		this.row = row;
+	}
+	public void setColumn(int column) {
+		this.column = column;
+	}
+	public void setCellNumber(int cellNumber) {
+		this.cellNumber = cellNumber;
+	}
 
-//	@Override
-//	public int compareTo(Cell cell) {
-//		return cellNumber - cell.cellNumber;
-//	}
+	@Override
+	public int compareTo(Cell cell) {
+		return cellNumber - cell.cellNumber;
+	}
 	public String printCharacter() {
 		if (character == 'I' || character == 'J')	// CHECK IF THIS IS NEEDED
 			return '\u0132' + "";	// IJ
