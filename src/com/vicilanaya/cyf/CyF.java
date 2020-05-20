@@ -7,11 +7,9 @@ package com.vicilanaya.cyf;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import week09.Node;
 
 /**
  * @author Florence Vicil Anaya Copyright 2020 vicilanaya@gmail.com
@@ -381,22 +379,11 @@ public class CyF extends Exception {
 	}	// end buildSquare method
 	
 	/** message processing */
-	private static void encipheringMessage(String validMessage) {	// CONTINUE HERE	// FIX LOGIC
-//		ArrayList<Character> b = new ArrayList<>();
-//		b = prepMessage(validMessage);
+	private static void encipheringMessage(String validMessage) {	// CONTINUE HERE
 		ArrayList<Character> b = prepMessage(validMessage);	// prepped message
-//		ArrayList<Character> c = new ArrayList<>();
-//		char[] temp = new char[2];
-//		for (int fromIndex = 0, toIndex = 1; fromIndex < b.size(); ) {
-//			List<Character> subList = b.subList(fromIndex, toIndex);	// sublist of each pair
-//			int x = square.indexOf(subList.get(0));
-//			int y = square.indexOf(subList.get(0));
-//			int m = square.indexOf(subList.get(0));
-//			int n = square.indexOf(subList.get(0));
-//		}	// end for loop
 		
-		Character char0 = null;	// Character pair in message
-		Character char1 = null;
+		char char0 = '\u0000';	// Character pair in message
+		char char1 = '\u0000';
 		int index0 = 0;
 		int index1 = 0;
 		Cell cell0 = null;	// Cell pair in square
@@ -404,8 +391,8 @@ public class CyF extends Exception {
 		for (int i = 0, j = 0; i < b.size(); ) {
 			char0 = b.get(i);	// get Character pair in b
 			char1 = b.get(j);
-			index0 = square.indexOf(valueOf(char0));	// find index of character in square
-			index1 = square.indexOf(char1);
+			index0 = square.indexOf(new Cell(char0));	// find index of character in square	char0.toString().charAt(0)
+			index1 = square.indexOf(new Cell (char1));	// WILL THIS WORK?
 			cell0 = square.get(index0);	// get Cell pair in square
 			cell1 = square.get(index1);
 			
@@ -478,7 +465,7 @@ public class CyF extends Exception {
 
 
 /** SERVICE CLASS */
-class Cell implements Comparable<Cell>{
+class Cell implements Cloneable, Comparable<Cell>{
 	
 	private char character;
 	private int row;
@@ -541,8 +528,18 @@ class Cell implements Comparable<Cell>{
 		else
 			return 0;
 	}
+	@Override
+	public Object clone() {	// DO I NEED THIS?
+		try {
+			return super.clone();
+		}
+		catch (CloneNotSupportedException exception7) {
+			exception7.printStackTrace();
+			return null;
+		}
+	}	// end clone method
 	public String printCharacter() {
-		if (character == 'I' || character == 'J')	// CHECK IF THIS IS NEEDED
+		if (character == 'I' || character == 'J')	// DO I NEED THIS?
 			return '\u0132' + "";	// IJ
 		return character + "";
 	}
