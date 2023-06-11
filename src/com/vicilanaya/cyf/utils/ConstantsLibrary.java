@@ -10,8 +10,9 @@ public class ConstantsLibrary {
 	private static final char F = 'F';
 	private static final char G = 'G';
 	private static final char H = 'H';
-	private static final char IJx = '\u0132';
-	private static final char IJ = IJx;
+	private static final char IJ = '\u0132';
+//	private static final char IJu = '\u0132';
+//	private static final char IJ = IJu;
 	private static final char K = 'K';
 	private static final char L = 'L';
 	private static final char M = 'M';
