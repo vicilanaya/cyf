@@ -5,12 +5,17 @@
  */
 package com.vicilanaya.cyf;
 
+import static com.vicilanaya.cyf.utils.ConstantsLibrary.ALPHABET;
+
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import com.vicilanaya.cyf.components.Cell;
+import com.vicilanaya.cyf.components.Square;
+import com.vicilanaya.cyf.menus.MenuProcessor;
+import com.vicilanaya.cyf.utils.ConstantsLibrary;
 
 
 /**
@@ -23,87 +28,39 @@ public class CyF extends Exception {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	/**
-	 * @param args
-	 */
 
-	static final char IJx = '\u0132';
-	static Cell A = new Cell('A');
-	static Cell B = new Cell('B');
-	static Cell C = new Cell('C');
-	static Cell D = new Cell('D');
-	static Cell E = new Cell('E');
-	static Cell F = new Cell('F');
-	static Cell G = new Cell('G');
-	static Cell H = new Cell('H');
-	static Cell IJ = new Cell(IJx);
-	static Cell K = new Cell('K');
-	static Cell L = new Cell('L');
-	static Cell M = new Cell('M');
-	static Cell N = new Cell('N');
-	static Cell O = new Cell('O');
-	static Cell P = new Cell('P');
-	static Cell Q = new Cell('Q');
-	static Cell R = new Cell('R');
-	static Cell S = new Cell('S');
-	static Cell T = new Cell('T');
-	static Cell U = new Cell('U');
-	static Cell V = new Cell('V');
-	static Cell W = new Cell('W');
-	static Cell X = new Cell('X');
-	static Cell Y = new Cell('Y');
-	static Cell Z = new Cell('Z');
-	static ArrayList<Cell> defaultSquare  = new ArrayList<>();
-			
+	private Square defaultSquare = new Square(null);
 	static Scanner keyboardInput = new Scanner(System.in);
+	
+	
 	static String originalMessage = null;
 	static String originalKey = null;
 	static String validMessage = null;
 	static String validKey = null;
 	static char[] squareCharacters = new char[25];
-	static ArrayList<Cell> square  = new ArrayList<>();
+//	static ArrayList<Cell> square  = new ArrayList<>();
 	static String encipheredMessage = null;
 	static String decipheredMessage = null;
 	
 	public static void main(String[] args) {
 		
-		System.out.println("Building defaultSquare");	// TEST
-		buildDefaultSquare(A,B,C,D,E,F,G,H,IJ,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z);
-		System.out.println("defaultSquare built");	// TEST
-		
-		System.out.println("Showing intro");	// TEST
-		showIntro();
-		System.out.println("Intro shown");	// TEST
+		System.out.println(ConstantsLibrary.getIntro());
+		System.out.println(MenuProcessor.getMainMenu());
 
-		System.out.println("Getting selection started");	// TEST
-		getSelection();
+		MenuProcessor.processMainMenuSelection(keyboardInput.nextInt());
+
+		Square customSquare = new Square(ALPHABET);
+		
 		
 	}	// end main method
 	
-	/** in main method */
-	private static void buildDefaultSquare(Cell...cells) {
-		for (Cell element : cells)
-			defaultSquare.add(element);
-	}	// end buildDefaultSquare method
-
-	private static String showIntro() {
-		return "*******Welcome to CyF*******\n"
-				+ "CyF is a cryptographic engine created by Florence Vicil Anaya. (Copyright 2020)\n"
-				+ "This application enciphers and deciphers messages by using a key. You receive\n" 
-				+ "the enciphered or deciphered message and the cipher square created from the key.\n"
-				+ "This engine is currently limited to processing the following characters:\n"
-				+ "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.\n"
-				+ "Numbers, punctuation, and symbols will be ignored.\n"
-				+ "The characters I and J will be treated as equals.\n";
-	}	// end showIntro method
 	
-	private static String showMenu() {
-		return "Choose your option:\n"
-				+ "1 - Encipher a message\n"
-				+ "2 - Decipher a message\n"
-				+ "3 - Show history\n"
-				+ "0 - Exit application\n";
-	}	// end showMenu method
+	
+//	/** in main method */
+//	private static void buildDefaultSquare(Cell...cells) {
+//		for (Cell element : cells)
+//			defaultSquare.add(element);
+//	}
 	
 	private static void getSelection() {
 		Integer selection = 100;	// Integer (not int) so that it can be compared to null
@@ -130,14 +87,14 @@ public class CyF extends Exception {
 			} while (selection < 0 || selection > 4 || selection == null);
 			
 			System.out.println("Switch started");	// TEST
-			switch (selection) {
-			case 0: System.out.print("Thank you for using CyF. You may restart the program.");
-					System.exit(1);
-			case 1: encipher(); break;
-			case 2: decipher(); break;
-			case 3: showInstructions(); break;
-			case 4: showHistory(); break;
-			}	// end switch
+//			switch (selection) {
+//			case 0: System.out.print("Thank you for using CyF. You may restart the program.");
+//					System.exit(1);
+//			case 1: encipher(); break;
+//			case 2: decipher(); break;
+//			case 3: showInstructions(); break;
+//			case 4: showHistory(); break;
+//			}	// end switch
 			System.out.println("Switch ended");	// TEST
 			System.out.println("End of content in while loop");	// TEST
 		} while (true);	// always show menu after execution of switch
@@ -358,7 +315,7 @@ public class CyF extends Exception {
 			Cell cell = tempSquare.get(index);	// cell with this index
 			cell.setRow(row);
 			cell.setColumn(column);
-			cell.setCellNumber(cellNumber);
+			cell.setPosition(cellNumber);
 			System.out.println("Attributes added to cell at index " + index + ": " + cell.toString());	// TEST
 			if (column % 5 == 0) {	// reset column to 1 if column is multiple of 5
 				row++;
