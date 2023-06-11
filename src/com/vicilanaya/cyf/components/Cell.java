@@ -1,37 +1,35 @@
 package com.vicilanaya.cyf.components;
 
+import java.util.Objects;
+
 public class Cell implements Cloneable, Comparable<Cell> {
 
-	private char character;
+	private int position;
 	private int row;
 	private int column;
-	private int cellNumber;
-	public static final char DEFAULT_CHARACTER = '\u0000';
+	private char character;
+	public static final int DEFAULT_POSITION = 0;
 	public static final int DEFAULT_ROW = 0;
 	public static final int DEFAULT_COLUMN = 0;
-	public static final int DEFAULT_CELL_NUMBER = 0;
-
-	public Cell(char character, int row, int column, int cellNumber) {
-		this.character = DEFAULT_CHARACTER;
-		this.row = DEFAULT_ROW;
-		this.column = DEFAULT_COLUMN;
-		this.cellNumber = DEFAULT_CELL_NUMBER;
-		setCharacter(character);
-		setRow(row);
-		setColumn(column);
-		setCellNumber(cellNumber);
-	}
+	public static final char DEFAULT_CHARACTER = '\u0000';
 
 	public Cell() {
-		this(DEFAULT_CHARACTER, DEFAULT_ROW, DEFAULT_COLUMN, DEFAULT_CELL_NUMBER);
+		this(DEFAULT_POSITION, DEFAULT_ROW, DEFAULT_COLUMN, DEFAULT_CHARACTER);
 	}
 
-	public Cell(char character) {
-		this(character, DEFAULT_ROW, DEFAULT_COLUMN, DEFAULT_CELL_NUMBER);
+	public Cell(int position, int row, int column, char character) {
+		this.position = DEFAULT_POSITION;
+		this.row = DEFAULT_ROW;
+		this.column = DEFAULT_COLUMN;
+		this.character = DEFAULT_CHARACTER;
+		setPosition(position);
+		setRow(row);
+		setColumn(column);
+		setCharacter(character);
 	}
 
-	public char getCharacter() {
-		return character;
+	public int getPosition() {
+		return position;
 	}
 
 	public int getRow() {
@@ -42,57 +40,85 @@ public class Cell implements Cloneable, Comparable<Cell> {
 		return column;
 	}
 
-	public int getCellNumber() {
-		return cellNumber;
+	public char getCharacter() {
+		return character;
 	}
 
-	public void setCharacter(char character) {
-		this.character = character;
+	public void setCharacter(char newCharacter) {
+		this.character = newCharacter;
 	}
 
-	public void setRow(int row) {
-		this.row = row;
+	public void setRow(int newRow) {
+		this.row = newRow;
 	}
 
-	public void setColumn(int column) {
-		this.column = column;
+	public void setColumn(int newColumn) {
+		this.column = newColumn;
 	}
 
-	public void setCellNumber(int cellNumber) {
-		this.cellNumber = cellNumber;
+	public void setPosition(int newPosition) {
+		this.position = newPosition;
 	}
 
 	@Override
 	public int compareTo(Cell cell) {
-//		return cellNumber - cell.cellNumber;
-		if (cellNumber > cell.cellNumber)
+//		return this.position - cell.position;
+		if (this.position > cell.position)
 			return 1;
-		else if (cellNumber < cell.cellNumber)
+		else if (this.position < cell.position)
 			return -1;
 		else
 			return 0;
 	}
 
 	@Override
-	public Object clone() { // DO I NEED THIS?
-		try {
-			return super.clone();
-		} catch (CloneNotSupportedException exception7) {
-			exception7.printStackTrace();
-			return null;
-		}
-	} // end clone method
+	public int hashCode() {
+//		return Objects.hash(character, column, position, row);//original
+		return Objects.hash(character);
+	}
 
-	public String printCharacter() {
-		if (character == 'I' || character == 'J') // DO I NEED THIS?
-			return '\u0132' + ""; // IJ
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null)
+			return false;
+		if (((Character) this.character).hashCode() == obj.hashCode())
+			return true;
+		if (getClass() != obj.getClass())
+			return false;
+		Cell other = (Cell) obj;
+		return this.character == other.character;
+
+		// original
+//		if (this == obj)
+//			return true;
+//		if (obj == null)
+//			return false;
+//		if (getClass() != obj.getClass())
+//			return false;
+//		Cell other = (Cell) obj;
+//		return character == other.character && column == other.column && position == other.position && row == other.row;
+	}
+
+	public String printCell() {
 		return character + "";
 	}
 
 	@Override
 	public String toString() {
-//		return "Cell [character=" + character + ", row=" + row + ", column=" + column + ", cellNumber=" + cellNumber + "]";	// default toString
-		return "Cell " + cellNumber + " [character=" + character + ", row=" + row + ", column=" + column + "]";
+		return "\nCell [position=" + position + ", character=" + character + ", row=" + row + ", column=" + column
+				+ "]";
+	}
+
+	public static void main(String[] args) {
+		Cell defaultCell = new Cell();
+		System.out.println(defaultCell.toString());
+
+		Cell customCell = new Cell(7, 7, 7, 'F');
+		System.out.println(customCell.toString());
+
+		// sample output
+//		Cell [position=0, character=, row=0, column=0]
+//		Cell [position=7, character=F, row=7, column=7]
 	}
 
 } // end Cell class
