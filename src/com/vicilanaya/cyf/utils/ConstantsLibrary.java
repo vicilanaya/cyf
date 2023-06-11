@@ -47,7 +47,7 @@ public class ConstantsLibrary {
 			+ "I used to look up information about brownies, the human body,\n"
 			+ "and number theory. One time I stumbled upon cryptography.\n"
 			+ "Cryptography was fascinating because I learned I could create\n"
-			+ "secret messages. Morethan anything, I was learning and doing\n" + "no other kids my age did.\n\n"
+			+ "secret messages. More than anything, I was learning and doing\n" + "no other kids my age did.\n\n"
 			+ "As a programmer, I needed to create projects with the skills I\n"
 			+ "was learning. The I remembered a cryptography square in the\n"
 			+ "encyclopedia and how much I enjoyed working with it back then.\n\n" + "This is how CyF was born.";
@@ -62,6 +62,37 @@ public class ConstantsLibrary {
 
 	public static String getCyfHistory() {
 		return CYF_HISTORY;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(getAlphabet());
+		System.out.println(getIntro());
+		System.out.println(String.valueOf(getCyfHistory()));
+
+		// sample output
+//		ABCDEFGH?KLMNOPQRSTUVWXYZ
+//		*******Welcome to CyF*******
+//		CyF is a cryptographic engine created by Florence Vicil Anaya. (Copyright 2020)
+//		This application enciphers and deciphers messages by using a key. You receive
+//		the enciphered or deciphered message and the cipher square created from the key.
+//		This engine is currently limited to processing the following characters:
+//		ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz.
+//		Numbers, punctuation, and symbols will be ignored.
+//		The characters I and J will be treated as equals.
+//
+//		History of the CyF project:
+//		When I was little, I used to read the Encyclopedia Britannica.
+//		I used to look up information about brownies, the human body,
+//		and number theory. One time I stumbled upon cryptography.
+//		Cryptography was fascinating because I learned I could create
+//		secret messages. More than anything, I was learning and doing
+//		no other kids my age did.
+//
+//		As a programmer, I needed to create projects with the skills I
+//		was learning. The I remembered a cryptography square in the
+//		encyclopedia and how much I enjoyed working with it back then.
+//
+//		This is how CyF was born.
 	}
 
 } // end Constants class
