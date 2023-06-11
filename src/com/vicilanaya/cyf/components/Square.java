@@ -1,10 +1,10 @@
 package com.vicilanaya.cyf.components;
 
-import static com.vicilanaya.cyf.utils.ConstantsLibrary.ALPHABET;
-
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
+
+import com.vicilanaya.cyf.utils.ConstantsLibrary;
 
 public class Square {
 
@@ -35,14 +35,15 @@ public class Square {
 
 		if (this.cipherKey == null) {
 			// default cells set for key-less square
-			addCellsToCellsSet(ALPHABET);
+			addCellsToCellsSet(ConstantsLibrary.getAlphabet());
 		} else {
 			// cells set for keyed square
-			char[] allCharacters = new char[this.cipherKey.length + ALPHABET.length];
+			char[] allCharacters = new char[this.cipherKey.length + ConstantsLibrary.getAlphabet().length];
 
 			// System.arraycopy(sourceArray, srcPos, targetArray, tarPos, length);
 			System.arraycopy(this.cipherKey, 0, allCharacters, 0, this.cipherKey.length);
-			System.arraycopy(ALPHABET, 0, allCharacters, this.cipherKey.length, ALPHABET.length);
+			System.arraycopy(ConstantsLibrary.getAlphabet(), 0, allCharacters, this.cipherKey.length,
+					ConstantsLibrary.getAlphabet().length);
 
 			addCellsToCellsSet(allCharacters);
 		}
@@ -75,7 +76,7 @@ public class Square {
 		} else {
 			System.out.println("Cipher Key: " + String.valueOf(cipherKey));
 		}
-		
+
 		for (Cell cell : this.cellsSet) {
 			if (cell.getColumn() == 4) {
 				System.out.println(cell.printCell()); // end of the row
@@ -96,7 +97,7 @@ public class Square {
 
 		Square customSquare = new Square("FLORENCE".toCharArray());
 		System.out.println(customSquare.toString());
-		
+
 		defaultSquare.printSquare();
 		customSquare.printSquare();
 
