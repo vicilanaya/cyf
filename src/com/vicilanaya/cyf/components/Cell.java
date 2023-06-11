@@ -73,7 +73,6 @@ public class Cell implements Cloneable, Comparable<Cell> {
 
 	@Override
 	public int hashCode() {
-//		return Objects.hash(character, column, position, row);//original
 		return Objects.hash(character);
 	}
 
@@ -87,20 +86,13 @@ public class Cell implements Cloneable, Comparable<Cell> {
 			return false;
 		Cell other = (Cell) obj;
 		return this.character == other.character;
-
-		// original
-//		if (this == obj)
-//			return true;
-//		if (obj == null)
-//			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-//		Cell other = (Cell) obj;
-//		return character == other.character && column == other.column && position == other.position && row == other.row;
 	}
 
 	public String printCell() {
-		return character + "";
+		if (character == '\u0132') {
+			return "IJ";
+		}
+		return String.valueOf(character);
 	}
 
 	@Override
@@ -119,6 +111,6 @@ public class Cell implements Cloneable, Comparable<Cell> {
 		// sample output
 //		Cell [position=0, character=, row=0, column=0]
 //		Cell [position=7, character=F, row=7, column=7]
-	}
+	} // end main method
 
 } // end Cell class
