@@ -1,22 +1,27 @@
 package com.vicilanaya.cyf.menus;
 
+import com.vicilanaya.cyf.utils.ConstantsLibrary;
+import com.vicilanaya.cyf.utils.DecipherProcessor;
+import com.vicilanaya.cyf.utils.EncipherProcessor;
+
 public class MenuProcessor {
 
 	private static final String MAIN_MENU = 
 			"Choose your action:\n" 
 			+ "1 - Encipher a message\n"
 			+ "2 - Decipher a message\n" 
-			+ "3 - Display all objects\n"
-			+ "4 - Go to display menu\n" 
+			+ "3 - Go to display menu\n" 
 			+ "0 - Exit application\n";
 	
 	private static final String DISPLAY_MENU = 
-			"Choose your action:\n" 
-			+ "1 - Display cipher key\n"
-			+ "2 - Display square\n" 
-			+ "3 - Display introduction\n" 
-			+ "4 - Display history log\n" 
-			+ "5 - Go back to main menu\n" 
+			"What do you want to display?\n" 
+			+ "1 - Cipher key\n"
+			+ "2 - My Square\n" 
+			+ "3 - Default square\n" 
+			+ "4 - Introduction\n"  
+			+ "5 - CyF History\n" 
+			+ "6 - History log\n" 
+			+ "7 - Main menu\n" 
 			+ "0 - Exit application\n";
 
 	public static String getMainMenu() {
@@ -31,10 +36,9 @@ public class MenuProcessor {
 		switch (selection) {
 		case 0: System.out.print("Thank you for using CyF. You may restart the program.");
 				System.exit(1);
-		case 1: encipher(); break;
-		case 2: decipher(); break;
-		case 3: showInstructions(); break;
-		case 4: showHistory(); break;
+		case 1: EncipherProcessor.encipher(); break;
+		case 2: DecipherProcessor.decipher(); break;
+		case 3: getDisplayMenu(); break;
 		}
 	}
 	
@@ -42,10 +46,13 @@ public class MenuProcessor {
 		switch (selection) {
 		case 0: System.out.print("Thank you for using CyF. You may restart the program.");
 				System.exit(1);
-		case 1: encipher(); break;
-		case 2: decipher(); break;
-		case 3: showInstructions(); break;
-		case 4: showHistory(); break;
+		case 1: customSquare.getCipherKey(); break;
+		case 2: customSquare.printSquare(); break;
+		case 3: defaultSquare.printSquare(); break;
+		case 4: ConstantsLibrary.getIntro(); break;
+		case 5: ConstantsLibrary.getCyfHistory(); break;
+		case 6: displayHistoryLog(); break;
+		case 7: getMainMenu(); break;
 		}
 	}
 	
