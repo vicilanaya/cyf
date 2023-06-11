@@ -5,14 +5,10 @@
  */
 package com.vicilanaya.cyf;
 
-import static com.vicilanaya.cyf.utils.ConstantsLibrary.ALPHABET;
-
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import com.vicilanaya.cyf.components.Cell;
 import com.vicilanaya.cyf.components.Square;
 import com.vicilanaya.cyf.menus.MenuProcessor;
 import com.vicilanaya.cyf.utils.ConstantsLibrary;
