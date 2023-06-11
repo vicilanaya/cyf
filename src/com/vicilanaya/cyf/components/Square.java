@@ -49,12 +49,12 @@ public class Square {
 	}
 
 	private void addCellsToCellsSet(char[] charsForNewCells) {
-		// characters only
+		// add characters only
 		for (int i = 0; i < charsForNewCells.length; i++) {
 			this.cellsSet.add(new Cell(0, 0, 0, charsForNewCells[i]));
 		}
 
-		// positions, rows, columns
+		// add positions, rows, columns
 		int i = 0, row = 0, column = 0;
 		for (Cell cell : this.cellsSet) {
 			if (column == 5) { // row is full
@@ -70,8 +70,20 @@ public class Square {
 	} // end addCellsToCellsSet method
 
 	public void printSquare() {
-		// TODO
-	}
+		if (cipherKey == null) {
+			System.out.println("This is a key-less cipher square.");
+		} else {
+			System.out.println("Cipher Key: " + String.valueOf(cipherKey));
+		}
+		
+		for (Cell cell : this.cellsSet) {
+			if (cell.getColumn() == 4) {
+				System.out.println(cell.printCell()); // end of the row
+			} else {
+				System.out.print(cell.printCell() + "\t");
+			}
+		}
+	} // end printSquare method
 
 	@Override
 	public String toString() {
@@ -141,6 +153,18 @@ public class Square {
 //		Cell [position=22, character=X, row=4, column=2], 
 //		Cell [position=23, character=Y, row=4, column=3], 
 //		Cell [position=24, character=Z, row=4, column=4]]]
-	}
+//		This is a key-less cipher square.
+//		A	B	C	D	E
+//		F	G	H	IJ	K
+//		L	M	N	O	P
+//		Q	R	S	T	U
+//		V	W	X	Y	Z
+//		Cipher Key: FLORENCE
+//		F	L	O	R	E
+//		N	C	A	B	D
+//		G	H	IJ	K	M
+//		P	Q	S	T	U
+//		V	W	X	Y	Z
+	} // end main method
 
 } // end Square class
