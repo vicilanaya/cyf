@@ -30,10 +30,10 @@ public class ConstantsLibrary {
 	private static final char Y = 'Y';
 	private static final char Z = 'Z';
 
-	public static final char[] ALPHABET = {A,B,C,D,E,F,G,H,IJ,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z};
+	public static final char[] ALPHABET = { A, B, C, D, E, F, G, H, IJ, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y,
+			Z };
 
-	private static final String INTRO = 
-			"*******Welcome to CyF*******\n"
+	private static final String INTRO = "*******Welcome to CyF*******\n"
 			+ "CyF is a cryptographic engine created by Florence Vicil Anaya. (Copyright 2020)\n"
 			+ "This application enciphers and deciphers messages by using a key. You receive\n"
 			+ "the enciphered or deciphered message and the cipher square created from the key.\n"
@@ -42,8 +42,26 @@ public class ConstantsLibrary {
 			+ "Numbers, punctuation, and symbols will be ignored.\n"
 			+ "The characters I and J will be treated as equals.\n";
 
+	private static final String CYF_HISTORY = "History of the CyF project:\n"
+			+ "When I was little, I used to read the Encyclopedia Britannica.\n"
+			+ "I used to look up information about brownies, the human body,\n"
+			+ "and number theory. One time I stumbled upon cryptography.\n"
+			+ "Cryptography was fascinating because I learned I could create\n"
+			+ "secret messages. Morethan anything, I was learning and doing\n" + "no other kids my age did.\n\n"
+			+ "As a programmer, I needed to create projects with the skills I\n"
+			+ "was learning. The I remembered a cryptography square in the\n"
+			+ "encyclopedia and how much I enjoyed working with it back then.\n\n" + "This is how CyF was born.";
+
+	public static char[] getAlphabet() {
+		return ALPHABET;
+	}
+
 	public static String getIntro() {
 		return INTRO;
+	}
+
+	public static String getCyfHistory() {
+		return CYF_HISTORY;
 	}
 
 } // end Constants class
