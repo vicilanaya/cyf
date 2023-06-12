@@ -22,8 +22,8 @@ public class CyF extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
-	protected final Square defaultSquare = new Square(null);
-	protected Square customSquare = null;
+	public final Square defaultSquare = new Square(null);
+	public Square customSquare = null;
 	
 	static Scanner keyboardInput = new Scanner(System.in);
 	
@@ -32,7 +32,6 @@ public class CyF extends Exception {
 	static String originalKey = null;
 	static String validMessage = null;
 	static String validKey = null;
-//	static ArrayList<Cell> square  = new ArrayList<>();
 	static String encipheredMessage = null;
 	static String decipheredMessage = null;
 	
