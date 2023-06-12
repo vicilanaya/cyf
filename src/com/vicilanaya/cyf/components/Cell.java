@@ -93,6 +93,11 @@ public class Cell implements Cloneable, Comparable<Cell> {
 			return "IJ";
 		}
 		return String.valueOf(character);
+		
+		// TODO
+//		PrintWriter printWriter = new PrintWriter(System.out,true);
+//		char aa = '\u0905';
+//		printWriter.println("aa = " + aa);
 	}
 
 	@Override
