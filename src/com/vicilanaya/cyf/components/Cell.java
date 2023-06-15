@@ -1,5 +1,7 @@
 package com.vicilanaya.cyf.components;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.Objects;
 
 public class Cell implements Cloneable, Comparable<Cell> {
@@ -12,6 +14,9 @@ public class Cell implements Cloneable, Comparable<Cell> {
 	public static final int DEFAULT_ROW = 0;
 	public static final int DEFAULT_COLUMN = 0;
 	public static final char DEFAULT_CHARACTER = '\u0000';
+	StringWriter stringWriter = new StringWriter();
+//	private PrintWriter printWriter = new PrintWriter(System.out,true);
+	private PrintWriter printWriter = new PrintWriter(stringWriter);
 
 	public Cell() {
 		this(DEFAULT_POSITION, DEFAULT_ROW, DEFAULT_COLUMN, DEFAULT_CHARACTER);
@@ -93,26 +98,43 @@ public class Cell implements Cloneable, Comparable<Cell> {
 			return "IJ";
 		}
 		return String.valueOf(character);
-		
-		// TODO
-//		PrintWriter printWriter = new PrintWriter(System.out,true);
-//		char aa = '\u0905';
-//		printWriter.println("aa = " + aa);
+	}
+
+	//TODO
+	public void printCell2() {
+//	public String printCell() {
+		printWriter.print(character);
+		printWriter.write(character);
+		printWriter.toString();
+//		return printWriter.print(character);
+		//https://stackoverflow.com/questions/44878530/print-unicode-character-in-java
+		//https://stackoverflow.com/questions/9226794/how-to-convert-printwriter-to-string-or-write-to-a-file
 	}
 
 	@Override
 	public String toString() {
-		return "\nCell [position=" + position + ", character=" + character + ", row=" + row + ", column=" + column
+//		return "\nCell [position=" + position + ", character=" + character + ", row=" + row + ", column=" + column
+		return "\nCell [position=" + position + ", character=" + printCell() + ", row=" + row + ", column=" + column
+				+ "]";
+	}
+
+	public String toStringNoNewLine() {
+//		return "Cell [position=" + position + ", character=" + character + ", row=" + row + ", column=" + column
+		return "Cell [position=" + position + ", character=" + printCell() + ", row=" + row + ", column=" + column
 				+ "]";
 	}
 
 	public static void main(String[] args) {
 		Cell defaultCell = new Cell();
-		System.out.println(defaultCell.toString());
+		System.out.println(defaultCell.toStringNoNewLine());
 
 		Cell customCell = new Cell(7, 7, 7, 'F');
-		System.out.println(customCell.toString());
+		System.out.println(customCell.toStringNoNewLine());
 
+		customCell = new Cell(7, 7, 7, '\u0132');
+//		System.out.println(customCell.toStringNoNewLine());
+		customCell.printCell2();
+		
 		// sample output
 //		Cell [position=0, character=, row=0, column=0]
 //		Cell [position=7, character=F, row=7, column=7]

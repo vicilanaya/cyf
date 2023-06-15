@@ -84,6 +84,16 @@ public class Square {
 				System.out.print(cell.printCell() + "\t");
 			}
 		}
+
+//		for (Cell cell : this.cellsSet) {
+//			if (cell.getColumn() == 4) {
+//				cell.printCell(); // end of the row
+//				System.out.print("\n");
+//			} else {
+//				cell.printCell();
+//				System.out.print("\t");
+//			}
+//		}
 	} // end printSquare method
 
 	@Override
@@ -111,7 +121,7 @@ public class Square {
 //		Cell [position=5, character=F, row=1, column=0], 
 //		Cell [position=6, character=G, row=1, column=1], 
 //		Cell [position=7, character=H, row=1, column=2], 
-//		Cell [position=8, character=?, row=1, column=3], 
+//		Cell [position=8, character=IJ, row=1, column=3], 
 //		Cell [position=9, character=K, row=1, column=4], 
 //		Cell [position=10, character=L, row=2, column=0], 
 //		Cell [position=11, character=M, row=2, column=1], 
@@ -141,7 +151,7 @@ public class Square {
 //		Cell [position=9, character=D, row=1, column=4], 
 //		Cell [position=10, character=G, row=2, column=0], 
 //		Cell [position=11, character=H, row=2, column=1], 
-//		Cell [position=12, character=?, row=2, column=2], 
+//		Cell [position=12, character=IJ, row=2, column=2], 
 //		Cell [position=13, character=K, row=2, column=3], 
 //		Cell [position=14, character=M, row=2, column=4], 
 //		Cell [position=15, character=P, row=3, column=0], 
