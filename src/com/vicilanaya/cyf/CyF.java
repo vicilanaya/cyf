@@ -10,7 +10,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import com.vicilanaya.cyf.components.Square;
-import com.vicilanaya.cyf.menus.MenuProcessor;
+import com.vicilanaya.cyf.processors.MenuProcessor;
 import com.vicilanaya.cyf.utils.ConstantsLibrary;
 
 

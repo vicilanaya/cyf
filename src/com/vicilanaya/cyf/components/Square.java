@@ -85,6 +85,7 @@ public class Square {
 			}
 		}
 
+		// if using PrintWriter
 //		for (Cell cell : this.cellsSet) {
 //			if (cell.getColumn() == 4) {
 //				cell.printCell(); // end of the row

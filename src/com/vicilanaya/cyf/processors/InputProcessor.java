@@ -1,4 +1,4 @@
-package com.vicilanaya.cyf.utils;
+package com.vicilanaya.cyf.processors;
 
 public class InputProcessor {
 	private static String inputCipherKey = null;
