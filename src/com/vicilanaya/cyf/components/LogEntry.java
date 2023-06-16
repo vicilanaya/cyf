@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class LogEntry {
 
-	private LocalDateTime TIME_STAMP = null;
+	private LocalDateTime TIME_STAMP = null; // https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html
 	private char[] CIPHER_KEY = null;
 	private String ORIGINAL_MESSAGE = null;
 	private String ENCIPHERED_MESSAGE = null;
