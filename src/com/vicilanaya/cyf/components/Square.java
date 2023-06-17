@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import com.vicilanaya.cyf.utils.ConstantsLibrary;
+import com.vicilanaya.cyf.util.ConstantsLibrary;
 
 public class Square {
 
